@@ -1,0 +1,2 @@
+iotlabcli<=2.5
+matplotlib<=3.1
