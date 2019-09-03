@@ -70,7 +70,6 @@ def draw_network(network, true_pos=True, *args, **kwargs):
     kwargs["node_size"] = 50
     kwargs["font_size"] = 2
     kwargs["font_color"] = "white"
-    kwargs["with_labels"] = True
     kwargs["node_color"] = color_map
     kwargs["pos"] = pos
     nx.draw(network.network, *args, **kwargs)
@@ -114,11 +113,11 @@ def construct_network(sink, iotlab_site=DEFAULT_IOTLAB_SITE,
     queue.put(sink)
 
     def _save_result():
-        draw_network(result, False)
+        draw_network(result, False, with_labels=True)
         plt.savefig(os.path.join(DATA_PATH, "{}_logic.svg".format(result)),
                     dpi=150)
         plt.clf()
-        draw_network(result, True)
+        draw_network(result, True, with_labels=True)
         plt.savefig(os.path.join(DATA_PATH, "{}_geo.svg".format(result)),
                     dpi=150)
         result.save_edgelist(
