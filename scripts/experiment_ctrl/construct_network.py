@@ -73,6 +73,7 @@ def construct_network(sink, iotlab_site=DEFAULT_IOTLAB_SITE,
         raise NetworkConstructionError("Sink {} is not 'Alive' (maybe booked "
                                        "by other experiment?)".format(sink))
     result = SinkNetworkedNodes(iotlab_site, sink)
+    sink = result[sink]
     # BFS from sink
     queue = Queue()
     visited = set([sink])
@@ -86,7 +87,7 @@ def construct_network(sink, iotlab_site=DEFAULT_IOTLAB_SITE,
     while not queue.empty() and len(result) < max_nodes:
         node = queue.get()
         candidates = _restrict_potential_neighbors(
-            node_selection.nodes, node_selection[sink], result
+            node_selection.nodes, node_selection[node.uri], result
         )
         if not candidates:
             continue
