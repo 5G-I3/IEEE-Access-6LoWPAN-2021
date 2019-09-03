@@ -42,10 +42,10 @@ class NetworkConstructionError(Exception):
     pass
 
 
-def construct_network(sink, iotlab_site=DEFAULT_IOTLAB_SITE, api=None,
+def construct_network(sink, iotlab_site=DEFAULT_IOTLAB_SITE,
                       min_distance=MIN_DISTANCE, max_distance=MAX_DISTANCE,
                       min_neighbors=MIN_NEIGHBORS, max_neighbors=MAX_NEIGHBORS,
-                      max_nodes=MAX_NODES):
+                      max_nodes=MAX_NODES, api=None):
     def _restrict_potential_neighbors(node_set, node, network):
         potential_neighbors = set(node_set.values())
         potential_neighbors.remove(node)
