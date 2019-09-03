@@ -1,3 +1,6 @@
 coloredlogs==15.0
 riotctrl<=0.4
 iotlab-controller[all]==0.7.2b0
+matplotlib<=3.1
+networkx<=2.3
+scipy<=1.3

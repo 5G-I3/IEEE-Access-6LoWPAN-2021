@@ -15,6 +15,8 @@ versions):
 
 - `iotlab_controller` (see https://github.com/miri64/iotlab_controller)
 - `networkx` v2.3
+- `matplotlib` v3.1
+- `scipy` v1.3
 
 The required packages are listed in `requirements.txt` and can be installed
 using

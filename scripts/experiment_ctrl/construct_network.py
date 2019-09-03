@@ -10,11 +10,16 @@
 
 import argparse
 import logging
+import matplotlib as mpl
+import networkx as nx
 import os
 from queue import Queue
 import random
 from iotlab_controller.common import get_default_api, get_uri
 from iotlab_controller.nodes import SinkNetworkedNodes
+
+mpl.use('svg')
+import matplotlib.pyplot as plt
 
 __author__ = "Martine S. Lenders"
 __copyright__ = "Copyright 2019 Freie Universität Berlin"
@@ -37,9 +42,38 @@ MIN_NEIGHBORS = 1
 MAX_NEIGHBORS = 3
 MAX_NODES = 50
 
+SINK_COLOR = "#330099"
+SINK_NEIGHBORS_COLOR = "#d3d3d3"
+SOURCE_COLOR = "#b5a3da"
+
 
 class NetworkConstructionError(Exception):
     pass
+
+
+def draw_network(network, true_pos=True, *args, **kwargs):
+    if true_pos:
+        pos = {k: (network.network.nodes[k]["info"].x,
+                   network.network.nodes[k]["info"].y)
+               for k in network.network}
+    else:
+        pos = nx.kamada_kawai_layout(network.network)
+    color_map = []
+    sink = network.network.nodes[network.sink]
+    for n in network.network:
+        if network.network.nodes[n] == sink:
+            color_map.append(SINK_COLOR)
+        elif n in network.neighbors(network.sink):
+            color_map.append(SINK_NEIGHBORS_COLOR)
+        else:
+            color_map.append(SOURCE_COLOR)
+    kwargs["node_size"] = 50
+    kwargs["font_size"] = 2
+    kwargs["font_color"] = "white"
+    kwargs["with_labels"] = True
+    kwargs["node_color"] = color_map
+    kwargs["pos"] = pos
+    nx.draw(network.network, *args, **kwargs)
 
 
 def construct_network(sink, iotlab_site=DEFAULT_IOTLAB_SITE,
@@ -80,9 +114,17 @@ def construct_network(sink, iotlab_site=DEFAULT_IOTLAB_SITE,
     queue.put(sink)
 
     def _save_result():
-        return result.save_edgelist(
+        draw_network(result, False)
+        plt.savefig(os.path.join(DATA_PATH, "{}_logic.svg".format(result)),
+                    dpi=150)
+        plt.clf()
+        draw_network(result, True)
+        plt.savefig(os.path.join(DATA_PATH, "{}_geo.svg".format(result)),
+                    dpi=150)
+        result.save_edgelist(
             os.path.join(DATA_PATH, "{}.edgelist.gz".format(result))
         )
+        plt.clf()
 
     while not queue.empty() and len(result) < max_nodes:
         node = queue.get()
