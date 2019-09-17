@@ -46,6 +46,13 @@ SINK_COLOR = "#330099"
 SINK_NEIGHBORS_COLOR = "#d3d3d3"
 SOURCE_COLOR = "#b5a3da"
 
+# Nodes known to have problems starting or being deployed properly
+NODE_BLACKLIST = {
+    "grenoble": set((12, 41, 50, 59, 74, 88, 104, 111, 130, 197, 206, 211,
+                     219, 234, 251, 253, 265, 269, 274, 280, 291)),
+    "lille": set((49, 69, 72, 85, 133, 139, 190)),
+}
+
 
 class NetworkConstructionError(Exception):
     pass
@@ -75,12 +82,19 @@ def draw_network(network, true_pos=True, *args, **kwargs):
     nx.draw(network.network, *args, **kwargs)
 
 
+def _node_num(node):
+    res = node.uri.split(".")[0]
+    return int(res.split("-")[-1])
+
+
 def construct_network(sink, iotlab_site=DEFAULT_IOTLAB_SITE,
                       min_distance=MIN_DISTANCE, max_distance=MAX_DISTANCE,
                       min_neighbors=MIN_NEIGHBORS, max_neighbors=MAX_NEIGHBORS,
                       max_nodes=MAX_NODES, api=None):
     def _restrict_potential_neighbors(node_set, node, network):
-        potential_neighbors = set(node_set.values())
+        potential_neighbors = set(n for n in node_set.values()
+                                  if _node_num(n) not in
+                                  NODE_BLACKLIST[iotlab_site])
         potential_neighbors.remove(node)
         # select nodes where
         # neigh is is within max_distance of node and
@@ -96,6 +110,9 @@ def construct_network(sink, iotlab_site=DEFAULT_IOTLAB_SITE,
             not any((neigh.distance(x) < min_distance) for x in network)
         ]
 
+    if sink in NODE_BLACKLIST[iotlab_site]:
+        logging.warning("Sink {} in blacklist for site {}".format(sink,
+                                                                  iotlab_site))
     sink = "{}-{}".format(ARCHI_SHORT, sink)
     if api is None:
         api = get_default_api()
