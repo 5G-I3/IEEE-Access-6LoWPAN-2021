@@ -520,8 +520,8 @@ def _savefig(filename):
 def _configure_plot(pgf=False, figsize=100):
     plt.rc("errorbar", capsize=3)
     if pgf:
-        normalsize = 10 * (100 / figsize)
-        scriptsize = 7 * (100 / figsize)
+        normalsize = 10 * (figsize / 100)
+        scriptsize = 7 * (figsize / 100)
         SAVEFIG_OPTS["figsize"] = (3.27835 * (figsize / 100),
                                    1.84409 * (figsize / 100))
         matplotlib.use("pgf")
