@@ -190,7 +190,8 @@ def main():
                         help="Maximum down-stream neighbors per node "
                         "(default: {})".format(MAX_NEIGHBORS), type=int)
     parser.add_argument("-N", "--max-nodes", default=MAX_NODES,
-                        help="Maximum number of nodes in network",
+                        help="Maximum number of nodes in network (default: {})"
+                        .format(MAX_NODES),
                         type=int)
     parser.add_argument("sink", type=int,
                         help="Number of the M3 sink node within the network")
