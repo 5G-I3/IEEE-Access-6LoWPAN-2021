@@ -27,7 +27,7 @@ NAME_PATTERN = r"6lo_comp_" \
                r"n(?P<network>m3-\d+x[0-9a-f]+)_c\d+__" \
                r"m{mode}_r{data_len}Bx\d+x{delay}ms_(?P<timestamp>\d+)"
 LOG_NAME_PATTERN = r"{}\.log".format(NAME_PATTERN.format(
-    mode=r"(?P<mode>(reass|fwd))",
+    mode=r"(?P<mode>(reass|fwd|e2e|sfr))",
     data_len=r"(?P<data_len>\d+)",
     delay=r"\d+"
 ))
@@ -109,7 +109,7 @@ def _parse_times_line(network, mode, data_len, line, match, times,
         dst = match.group("node")
         assert node is not None
         if (node, pkt_id) not in times:
-            raise LogError("{} has no out from m3-{}"
+            raise LogError("{} has no out from {}"
                            .format(line.strip(), node))
         return {
             "mode": mode,

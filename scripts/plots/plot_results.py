@@ -30,14 +30,18 @@ SCRIPT_PATH = os.path.dirname(os.path.realpath(__file__))
 DATA_PATH = os.environ.get("DATA_PATH",
                            os.path.join(SCRIPT_PATH, "..", "..", "results"))
 
-BAR_WIDTH = .4
+BAR_WIDTH = .2
 COLORS = {
     "reass": "#8466c2",
     "fwd": "#ffbd5c",
+    "sfr": "#000060",
+    "e2e": "#600000",
 }
 MODES_READABLE = {
     "reass": "HWR",
-    "fwd": "FF"
+    "fwd": "FF",
+    "sfr": "SFR",
+    "e2e": "E2E",
 }
 SAVEFIG_OPTS = {
     "dpi": 150,
@@ -45,7 +49,7 @@ SAVEFIG_OPTS = {
 }
 
 NAME_PATTERN = parse_results.NAME_PATTERN.format(
-    mode=r"(?P<mode>(reass|fwd))",
+    mode=r"(?P<mode>(reass|fwd|e2e|sfr))",
     data_len=r"(?P<data_len>\d+)",
     delay=r"\d+"
 )
@@ -53,7 +57,7 @@ TIMES_CSV_NAME_PATTERN_FMT = "{}.times.csv".format(parse_results.NAME_PATTERN)
 STATS_CSV_NAME_PATTERN_FMT = "{}.stats.csv".format(parse_results.NAME_PATTERN)
 
 RUNS = 3
-MODES = ["reass", "fwd"]
+MODES = ["reass", "fwd", "e2e", "sfr"]
 DATA_LENS = [16, 80, 176, 272, 368, 464, 560, 656,
              752, 848, 944, 1040, 1136, 1232]
 DELAY = 10000
@@ -93,7 +97,8 @@ def plot_pdr(runs=RUNS):
         style = {}
         style["color"] = COLORS[mode]
         if means[means_mask].any():
-            plt.bar(index[means_mask] + (o * BAR_WIDTH) - (BAR_WIDTH / 2),
+            print(mode, means[means_mask])
+            plt.bar(index[means_mask] + (o * BAR_WIDTH) - (BAR_WIDTH),
                     means[means_mask], BAR_WIDTH, yerr=errs[means_mask],
                     label=MODES_READABLE[mode], **style)
     _plot_show_and_save(
@@ -159,7 +164,7 @@ def plot_lat(runs=RUNS):
                 .astype(np.double)
             errs = np.array([np.std(latencies[s][h]) for s in DATA_LENS])
             means_mask = np.isfinite(means)
-            plt.bar(index[means_mask] + (o * BAR_WIDTH) - (BAR_WIDTH / 2),
+            plt.bar(index[means_mask] + (o * BAR_WIDTH) - (BAR_WIDTH),
                     means[means_mask] - last_means[means_mask], BAR_WIDTH,
                     yerr=errs[means_mask], bottom=last_means[means_mask],
                     label="{} ({} hops)".format(MODES_READABLE[mode],
@@ -184,11 +189,13 @@ def plot_lat(runs=RUNS):
 def plot_l2_retrans(runs=RUNS):
     plt.clf()
     offset = {
-            "reass": -0.15,
-            "fwd": 0.15,
+            "reass": -0.30,
+            "fwd": -0.15,
+            "e2e": 0.15,
+            "sfr": 0.30,
         }
     networks = set()
-    mode_marker = {"fwd": "x", "reass": "+"}
+    mode_marker = {"fwd": "x", "reass": "+", "e2e": ".", "sfr": "*"}
     for mode in MODES:
         l2_retrans = []
         means = [[] for _ in DATA_LENS]
@@ -273,7 +280,7 @@ def plot_pktbuf(runs=RUNS):
         style = {}
         style["color"] = COLORS[mode]
         if means[means_mask].any():
-            plt.bar(index[means_mask] + (o * BAR_WIDTH) - (BAR_WIDTH / 2),
+            plt.bar(index[means_mask] + (o * BAR_WIDTH) - (BAR_WIDTH),
                     means[means_mask], BAR_WIDTH, yerr=errs[means_mask],
                     label=MODES_READABLE[mode], **style)
     _plot_show_and_save(
@@ -289,12 +296,16 @@ def plot_pktbuf(runs=RUNS):
 def plot_rbuf_full(runs=RUNS):
     plt.clf()
     offset = {
-            "reass": -0.2,
-            "fwd": 0,
-            "fwd_vrb": 0.2,
+            "reass": -0.3,
+            "fwd": -0.2,
+            "fwd_vrb": 0.1,
+            "e2e": 0.1,
+            "sfr": 0.2,
+            "sfr_vrb": 0.3,
         }
     networks = set()
-    mode_marker = {"fwd": "x", "reass": "+", "fwd_vrb": "v"}
+    mode_marker = {"fwd": "x", "reass": "+", "e2e": ".", "sfr": "*",
+                   "fwd_vrb": "v", "sfr_vrb": "^"}
     for mode in MODES:
         rbuf_full = []
         vrb_full = []
@@ -325,12 +336,13 @@ def plot_rbuf_full(runs=RUNS):
                                              "missing for {}"
                                              .format(filename,
                                                      row["node"]))
-                            if mode != "reass" and \
+                            if mode not in ["reass", "e2e"] and \
                                row["vrb_full"] != "":
                                 vrb_full.append(
                                         (i, int(row["vrb_full"]))
                                     )
-                            elif mode != "reass" and row["vrb_full"] == "":
+                            elif mode not in ["reass", "e2e"] and \
+                                 row["vrb_full"] == "":
                                 logging.warn("{}: Incomplete data set, "
                                              "VRB data missing for {}"
                                              .format(filename,
@@ -354,7 +366,7 @@ def plot_rbuf_full(runs=RUNS):
         plt.scatter([e[0] + offset[mode] for e in rbuf_full],
                     [e[1] for e in rbuf_full],
                     marker=mode_marker[mode], alpha=0.2)
-        if mode != "reass":
+        if mode not in ["reass", "e2e"]:
             means = np.array(vrb_full_m)
             means_mask = np.isfinite(means)
             tmp = "{}_vrb".format(mode)
