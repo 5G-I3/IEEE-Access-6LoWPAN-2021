@@ -10,7 +10,10 @@ import csv
 import logging
 import networkx as nx
 import re
+import multiprocessing
 import os
+import queue
+import threading
 
 __author__ = "Martine S. Lenders"
 __copyright__ = "Copyright 2019 Freie Universität Berlin"
@@ -27,7 +30,7 @@ NAME_PATTERN = r"6lo_comp_" \
                r"n(?P<network>m3-\d+x[0-9a-f]+)_c\d+__" \
                r"m{mode}_r{data_len}Bx\d+x{delay}ms_(?P<timestamp>\d+)"
 LOG_NAME_PATTERN = r"{}\.log".format(NAME_PATTERN.format(
-    mode=r"(?P<mode>(reass|fwd|e2e|sfr))",
+    mode=r"(?P<mode>(reass|fwd|e2e|sfr-\w+))",
     data_len=r"(?P<data_len>\d+)",
     delay=r"\d+"
 ))
@@ -46,6 +49,8 @@ LOG_PKTBUF_USAGE_PATTERN = r"(?P<node>m3-\d+);  position of last byte " \
                            r"used: (?P<pktbuf_usage>\d+)"
 LOG_RBUF_PATTERN = r"(?P<node>m3-\d+);rbuf full: (?P<rbuf_full>\d+)"
 LOG_VRB_PATTERN = r"(?P<node>m3-\d+);VRB full: (?P<vrb_full>\d+)"
+LOG_FRAG_COMP_PATTERN = r"(?P<node>m3-\d+);frags complete: (?P<frag_comp>\d+)"
+LOG_DG_COMP_PATTERN = r"(?P<node>m3-\d+);dgs complete: (?P<dg_comp>\d+)"
 
 LINK_LOCAL_PREFIX = "fe80::"
 
@@ -108,9 +113,6 @@ def _parse_times_line(network, mode, data_len, line, match, times,
         pkt_id = int(match.group("pkt_id"), base=16)
         dst = match.group("node")
         assert node is not None
-        if (node, pkt_id) not in times:
-            raise LogError("{} has no out from {}"
-                           .format(line.strip(), node))
         return {
             "mode": mode,
             "data_len": data_len,
@@ -131,7 +133,7 @@ def _get_csv_writers(times_csvfile, stats_csvfile):
                                delimiter=";")
     stats_fieldnames = ["node", "hops_to_sink", "successors",
                         "l2_retrans", "pktbuf_usage", "pktbuf_size",
-                        "rbuf_full", "vrb_full"]
+                        "rbuf_full", "vrb_full", "frag_comp", "dg_comp"]
     stats_csv = csv.DictWriter(stats_csvfile,
                                fieldnames=stats_fieldnames,
                                delimiter=";")
@@ -178,6 +180,8 @@ def log_to_csvs(logname, network, mode, data_len, data_path=DATA_PATH):
             c_pktbuf_usage = re.compile(LOG_PKTBUF_USAGE_PATTERN)
             c_rbuf = re.compile(LOG_RBUF_PATTERN)
             c_vrb = re.compile(LOG_VRB_PATTERN)
+            c_frag_comp = re.compile(LOG_FRAG_COMP_PATTERN)
+            c_dg_comp = re.compile(LOG_DG_COMP_PATTERN)
             experiment_started = False
             times = {}
             stats = {}
@@ -239,6 +243,20 @@ def log_to_csvs(logname, network, mode, data_len, data_path=DATA_PATH):
                     vrb_full = int(match.group("vrb_full"))
                     stats[node].update({"vrb_full": vrb_full})
                     continue
+
+                match = c_frag_comp.search(line)
+                if match is not None:
+                    node = match.group("node")
+                    frag_comp = int(match.group("frag_comp"))
+                    stats[node].update({"frag_comp": frag_comp})
+                    continue
+
+                match = c_dg_comp.search(line)
+                if match is not None:
+                    node = match.group("node")
+                    dg_comp = int(match.group("dg_comp"))
+                    stats[node].update({"dg_comp": dg_comp})
+                    continue
             _write_csvs(times, times_csvfile, stats, stats_csvfile,
                         graph, sink)
     except KeyboardInterrupt as exc:
@@ -251,6 +269,21 @@ def log_to_csvs(logname, network, mode, data_len, data_path=DATA_PATH):
         logging.error(exc)
 
 
+class ConverterThread(threading.Thread):
+    def __init__(self, data_path, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.queue = queue.Queue()
+        self.data_path = data_path
+
+    def run(self, *args, **kwargs):
+        while True:
+            item = self.queue.get()
+            if item["logname"] is None:
+                return
+            log_to_csvs(item["logname"], data_path=self.data_path,
+                        **item["params"])
+
+
 def match_to_dict(match):
     res = match.groupdict()
     res["data_len"] = int(res["data_len"])
@@ -260,11 +293,24 @@ def match_to_dict(match):
 
 def logs_to_csvs(data_path=DATA_PATH):
     comp = re.compile(LOG_NAME_PATTERN)
+    threads = [ConverterThread(data_path)
+               for _ in range(multiprocessing.cpu_count())]
+    next_thread = 0
+    for thread in threads:
+        thread.start()
     for logname in os.listdir(data_path):
         match = comp.match(logname)
         if match is not None:
             logname = os.path.join(data_path, logname)
-            log_to_csvs(logname, data_path=data_path, **match_to_dict(match))
+            threads[next_thread].queue.put(
+                {"logname": logname, "params": match_to_dict(match)}
+            )
+            next_thread += 1
+            next_thread %= len(threads)
+    for thread in threads:
+        thread.queue.put({"logname": None})
+    for thread in threads:
+        thread.join()
 
 
 if __name__ == "__main__":

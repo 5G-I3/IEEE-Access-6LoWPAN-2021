@@ -30,26 +30,95 @@ SCRIPT_PATH = os.path.dirname(os.path.realpath(__file__))
 DATA_PATH = os.environ.get("DATA_PATH",
                            os.path.join(SCRIPT_PATH, "..", "..", "results"))
 
-BAR_WIDTH = .2
 COLORS = {
     "reass": "#8466c2",
     "fwd": "#ffbd5c",
-    "sfr": "#000060",
+    "sfr-win1ifg100arq1200r4dg0": "#000060",
+    "sfr-win1ifg100arq1200r4dg1": "#000060",
+    "sfr-win1ifg100arq2400r4dg0": "#000060",
+    "sfr-win1ifg100arq2400r4dg1": "#000060",
+    "sfr-win1ifg200arq1200r4dg0": "#000060",
+    "sfr-win1ifg200arq1200r4dg1": "#000060",
+    "sfr-win1ifg200arq2400r4dg0": "#000060",
+    "sfr-win1ifg200arq2400r4dg1": "#000060",
+    "sfr-win1ifg500arq1200r4dg0": "#000060",
+    "sfr-win1ifg500arq1200r4dg1": "#000060",
+    "sfr-win1ifg500arq2400r4dg0": "#000060",
+    "sfr-win1ifg500arq2400r4dg1": "#000060",
+    "sfr-win2ifg100arq1200r4dg0": "#000060",
+    "sfr-win2ifg100arq1200r4dg1": "#000060",
+    "sfr-win2ifg100arq2400r4dg0": "#000060",
+    "sfr-win2ifg100arq2400r4dg1": "#000060",
+    "sfr-win2ifg200arq1200r4dg0": "#000060",
+    "sfr-win2ifg200arq1200r4dg1": "#000060",
+    "sfr-win2ifg200arq2400r4dg0": "#000060",
+    "sfr-win2ifg200arq2400r4dg1": "#000060",
+    "sfr-win2ifg500arq1200r4dg0": "#000060",
+    "sfr-win2ifg500arq1200r4dg1": "#000060",
+    "sfr-win2ifg500arq2400r4dg0": "#000060",
+    "sfr-win2ifg500arq2400r4dg1": "#000060",
+    "sfr-win5ifg100arq1200r4dg0": "#000060",
+    "sfr-win5ifg100arq1200r4dg1": "#000060",
+    "sfr-win5ifg100arq2400r4dg0": "#000060",
+    "sfr-win5ifg100arq2400r4dg1": "#000060",
+    "sfr-win5ifg200arq1200r4dg0": "#000060",
+    "sfr-win5ifg200arq1200r4dg1": "#000060",
+    "sfr-win5ifg200arq2400r4dg0": "#000060",
+    "sfr-win5ifg200arq2400r4dg1": "#000060",
+    "sfr-win5ifg500arq1200r4dg0": "#000060",
+    "sfr-win5ifg500arq1200r4dg1": "#000060",
+    "sfr-win5ifg500arq2400r4dg0": "#000060",
+    "sfr-win5ifg500arq2400r4dg1": "#000060",
     "e2e": "#600000",
 }
 MODES_READABLE = {
     "reass": "HWR",
     "fwd": "FF",
-    "sfr": "SFR",
+    "sfr-win1ifg100arq1200r4dg0": "SFR (1,100,1200,4,0)",
+    "sfr-win1ifg100arq1200r4dg1": "SFR (1,100,1200,4,1)",
+    "sfr-win1ifg100arq2400r4dg0": "SFR (1,100,2400,4,0)",
+    "sfr-win1ifg100arq2400r4dg1": "SFR (1,100,2400,4,1)",
+    "sfr-win1ifg200arq1200r4dg0": "SFR (1,200,1200,4,0)",
+    "sfr-win1ifg200arq1200r4dg1": "SFR (1,200,1200,4,1)",
+    "sfr-win1ifg200arq2400r4dg0": "SFR (1,200,2400,4,0)",
+    "sfr-win1ifg200arq2400r4dg1": "SFR (1,200,2400,4,1)",
+    "sfr-win1ifg500arq1200r4dg0": "SFR (1,500,1200,4,0)",
+    "sfr-win1ifg500arq1200r4dg1": "SFR (1,500,1200,4,1)",
+    "sfr-win1ifg500arq2400r4dg0": "SFR (1,500,2400,4,0)",
+    "sfr-win1ifg500arq2400r4dg1": "SFR (1,500,2400,4,1)",
+    "sfr-win2ifg100arq1200r4dg0": "SFR (2,100,1200,4,0)",
+    "sfr-win2ifg100arq1200r4dg1": "SFR (2,100,1200,4,1)",
+    "sfr-win2ifg100arq2400r4dg0": "SFR (2,100,2400,4,0)",
+    "sfr-win2ifg100arq2400r4dg1": "SFR (2,100,2400,4,1)",
+    "sfr-win2ifg200arq1200r4dg0": "SFR (2,200,1200,4,0)",
+    "sfr-win2ifg200arq1200r4dg1": "SFR (2,200,1200,4,1)",
+    "sfr-win2ifg200arq2400r4dg0": "SFR (2,200,2400,4,0)",
+    "sfr-win2ifg200arq2400r4dg1": "SFR (2,200,2400,4,1)",
+    "sfr-win2ifg500arq1200r4dg0": "SFR (2,500,1200,4,0)",
+    "sfr-win2ifg500arq1200r4dg1": "SFR (2,500,1200,4,1)",
+    "sfr-win2ifg500arq2400r4dg0": "SFR (2,500,2400,4,0)",
+    "sfr-win2ifg500arq2400r4dg1": "SFR (2,500,2400,4,1)",
+    "sfr-win5ifg100arq1200r4dg0": "SFR (5,100,1200,4,0)",
+    "sfr-win5ifg100arq1200r4dg1": "SFR (5,100,1200,4,1)",
+    "sfr-win5ifg100arq2400r4dg0": "SFR (5,100,2400,4,0)",
+    "sfr-win5ifg100arq2400r4dg1": "SFR (5,100,2400,4,1)",
+    "sfr-win5ifg200arq1200r4dg0": "SFR (5,200,1200,4,0)",
+    "sfr-win5ifg200arq1200r4dg1": "SFR (5,200,1200,4,1)",
+    "sfr-win5ifg200arq2400r4dg0": "SFR (5,200,2400,4,0)",
+    "sfr-win5ifg200arq2400r4dg1": "SFR (5,200,2400,4,1)",
+    "sfr-win5ifg500arq1200r4dg0": "SFR (5,500,1200,4,0)",
+    "sfr-win5ifg500arq1200r4dg1": "SFR (5,500,1200,4,1)",
+    "sfr-win5ifg500arq2400r4dg0": "SFR (5,500,2400,4,0)",
+    "sfr-win5ifg500arq2400r4dg1": "SFR (5,500,2400,4,1)",
     "e2e": "E2E",
 }
 SAVEFIG_OPTS = {
-    "dpi": 150,
+   "dpi": 150,
     "bbox_inches": "tight"
 }
 
 NAME_PATTERN = parse_results.NAME_PATTERN.format(
-    mode=r"(?P<mode>(reass|fwd|e2e|sfr))",
+    mode=r"(?P<mode>(reass|fwd|e2e|sfr-\w+))",
     data_len=r"(?P<data_len>\d+)",
     delay=r"\d+"
 )
@@ -57,11 +126,48 @@ TIMES_CSV_NAME_PATTERN_FMT = "{}.times.csv".format(parse_results.NAME_PATTERN)
 STATS_CSV_NAME_PATTERN_FMT = "{}.stats.csv".format(parse_results.NAME_PATTERN)
 
 RUNS = 3
-MODES = ["reass", "fwd", "e2e", "sfr"]
+MODES = ["reass", "fwd", "e2e",
+         "sfr-win1ifg100arq1200r4dg0",
+         "sfr-win1ifg100arq1200r4dg1",
+         "sfr-win1ifg100arq2400r4dg0",
+         "sfr-win1ifg100arq2400r4dg1",
+         "sfr-win1ifg200arq1200r4dg0",
+         "sfr-win1ifg200arq1200r4dg1",
+         "sfr-win1ifg200arq2400r4dg0",
+         "sfr-win1ifg200arq2400r4dg1",
+         "sfr-win1ifg500arq1200r4dg0",
+         "sfr-win1ifg500arq1200r4dg1",
+         "sfr-win1ifg500arq2400r4dg0",
+         "sfr-win1ifg500arq2400r4dg1",
+         "sfr-win2ifg100arq1200r4dg0",
+         "sfr-win2ifg100arq1200r4dg1",
+         "sfr-win2ifg100arq2400r4dg0",
+         "sfr-win2ifg100arq2400r4dg1",
+         "sfr-win2ifg200arq1200r4dg0",
+         "sfr-win2ifg200arq1200r4dg1",
+         "sfr-win2ifg200arq2400r4dg0",
+         "sfr-win2ifg200arq2400r4dg1",
+         "sfr-win2ifg500arq1200r4dg0",
+         "sfr-win2ifg500arq1200r4dg1",
+         "sfr-win2ifg500arq2400r4dg0",
+         "sfr-win2ifg500arq2400r4dg1",
+         "sfr-win5ifg100arq1200r4dg0",
+         "sfr-win5ifg100arq1200r4dg1",
+         "sfr-win5ifg100arq2400r4dg0",
+         "sfr-win5ifg100arq2400r4dg1",
+         "sfr-win5ifg200arq1200r4dg0",
+         "sfr-win5ifg200arq1200r4dg1",
+         "sfr-win5ifg200arq2400r4dg0",
+         "sfr-win5ifg200arq2400r4dg1",
+         "sfr-win5ifg500arq1200r4dg0",
+         "sfr-win5ifg500arq1200r4dg1",
+         "sfr-win5ifg500arq2400r4dg0",
+         "sfr-win5ifg500arq2400r4dg1"]
 DATA_LENS = [16, 80, 176, 272, 368, 464, 560, 656,
              752, 848, 944, 1040, 1136, 1232]
 DELAY = 10000
 MAX_HOPS = 7
+BAR_WIDTH = (1 / len(MODES)) - .05
 
 
 def plot_pdr(runs=RUNS):
@@ -96,9 +202,9 @@ def plot_pdr(runs=RUNS):
         index = np.arange(1, len(DATA_LENS) + 1)
         style = {}
         style["color"] = COLORS[mode]
-        if means[means_mask].any():
+        if means_mask.any():
             print(mode, means[means_mask])
-            plt.bar(index[means_mask] + (o * BAR_WIDTH) - (BAR_WIDTH),
+            plt.bar(index[means_mask] + (o * BAR_WIDTH) - ((len(MODES) / 2) * BAR_WIDTH),
                     means[means_mask], BAR_WIDTH, yerr=errs[means_mask],
                     label=MODES_READABLE[mode], **style)
     _plot_show_and_save(
@@ -164,13 +270,15 @@ def plot_lat(runs=RUNS):
                 .astype(np.double)
             errs = np.array([np.std(latencies[s][h]) for s in DATA_LENS])
             means_mask = np.isfinite(means)
-            plt.bar(index[means_mask] + (o * BAR_WIDTH) - (BAR_WIDTH),
+            plt.bar(index[means_mask] + (o * BAR_WIDTH) - ((len(MODES) / 2) * BAR_WIDTH),
                     means[means_mask] - last_means[means_mask], BAR_WIDTH,
                     yerr=errs[means_mask], bottom=last_means[means_mask],
                     label="{} ({} hops)".format(MODES_READABLE[mode],
                                                 h + 2),
                     **style)
             last_means = means
+    ax = plt.gca()
+    ax.set_yscale("symlog")
     _plot_show_and_save(
         networks,
         "lat",
@@ -192,10 +300,10 @@ def plot_l2_retrans(runs=RUNS):
             "reass": -0.30,
             "fwd": -0.15,
             "e2e": 0.15,
-            "sfr": 0.30,
+            "sfr-win1ifg100arq1200r4dg0": 0.30,
         }
     networks = set()
-    mode_marker = {"fwd": "x", "reass": "+", "e2e": ".", "sfr": "*"}
+    mode_marker = {"fwd": "x", "reass": "+", "e2e": ".", "sfr-win1ifg100arq1200r4dg0": "*"}
     for mode in MODES:
         l2_retrans = []
         means = [[] for _ in DATA_LENS]
@@ -279,7 +387,7 @@ def plot_pktbuf(runs=RUNS):
         index = np.arange(1, len(DATA_LENS) + 1)
         style = {}
         style["color"] = COLORS[mode]
-        if means[means_mask].any():
+        if means_mask.any():
             plt.bar(index[means_mask] + (o * BAR_WIDTH) - (BAR_WIDTH),
                     means[means_mask], BAR_WIDTH, yerr=errs[means_mask],
                     label=MODES_READABLE[mode], **style)
@@ -300,11 +408,11 @@ def plot_rbuf_full(runs=RUNS):
             "fwd": -0.2,
             "fwd_vrb": 0.1,
             "e2e": 0.1,
-            "sfr": 0.2,
+            "sfr-win1ifg100arq1200r4dg0": 0.2,
             "sfr_vrb": 0.3,
         }
     networks = set()
-    mode_marker = {"fwd": "x", "reass": "+", "e2e": ".", "sfr": "*",
+    mode_marker = {"fwd": "x", "reass": "+", "e2e": ".", "sfr-win1ifg100arq1200r4dg0": "*",
                    "fwd_vrb": "v", "sfr_vrb": "^"}
     for mode in MODES:
         rbuf_full = []
@@ -531,6 +639,7 @@ def _savefig(filename):
 
 def _configure_plot(pgf=False, figsize=100):
     plt.rc("errorbar", capsize=3)
+    SAVEFIG_OPTS["figsize"] = (100, 10)
     if pgf:
         normalsize = 10 * (figsize / 100)
         scriptsize = 7 * (figsize / 100)
