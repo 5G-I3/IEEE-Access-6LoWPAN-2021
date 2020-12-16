@@ -31,85 +31,85 @@ DATA_PATH = os.environ.get("DATA_PATH",
                            os.path.join(SCRIPT_PATH, "..", "..", "results"))
 
 COLORS = {
-    "reass": "#8466c2",
-    "fwd": "#ffbd5c",
-    "sfr-win1ifg100arq1200r4dg0": "#000060",
-    "sfr-win1ifg100arq1200r4dg1": "#000060",
-    "sfr-win1ifg100arq2400r4dg0": "#000060",
-    "sfr-win1ifg100arq2400r4dg1": "#000060",
-    "sfr-win1ifg200arq1200r4dg0": "#000060",
-    "sfr-win1ifg200arq1200r4dg1": "#000060",
-    "sfr-win1ifg200arq2400r4dg0": "#000060",
-    "sfr-win1ifg200arq2400r4dg1": "#000060",
-    "sfr-win1ifg500arq1200r4dg0": "#000060",
-    "sfr-win1ifg500arq1200r4dg1": "#000060",
-    "sfr-win1ifg500arq2400r4dg0": "#000060",
-    "sfr-win1ifg500arq2400r4dg1": "#000060",
-    "sfr-win2ifg100arq1200r4dg0": "#000060",
-    "sfr-win2ifg100arq1200r4dg1": "#000060",
-    "sfr-win2ifg100arq2400r4dg0": "#000060",
-    "sfr-win2ifg100arq2400r4dg1": "#000060",
-    "sfr-win2ifg200arq1200r4dg0": "#000060",
-    "sfr-win2ifg200arq1200r4dg1": "#000060",
-    "sfr-win2ifg200arq2400r4dg0": "#000060",
-    "sfr-win2ifg200arq2400r4dg1": "#000060",
-    "sfr-win2ifg500arq1200r4dg0": "#000060",
-    "sfr-win2ifg500arq1200r4dg1": "#000060",
-    "sfr-win2ifg500arq2400r4dg0": "#000060",
-    "sfr-win2ifg500arq2400r4dg1": "#000060",
-    "sfr-win5ifg100arq1200r4dg0": "#000060",
-    "sfr-win5ifg100arq1200r4dg1": "#000060",
-    "sfr-win5ifg100arq2400r4dg0": "#000060",
-    "sfr-win5ifg100arq2400r4dg1": "#000060",
-    "sfr-win5ifg200arq1200r4dg0": "#000060",
-    "sfr-win5ifg200arq1200r4dg1": "#000060",
-    "sfr-win5ifg200arq2400r4dg0": "#000060",
-    "sfr-win5ifg200arq2400r4dg1": "#000060",
-    "sfr-win5ifg500arq1200r4dg0": "#000060",
-    "sfr-win5ifg500arq1200r4dg1": "#000060",
-    "sfr-win5ifg500arq2400r4dg0": "#000060",
-    "sfr-win5ifg500arq2400r4dg1": "#000060",
-    "e2e": "#600000",
+    "reass": "#2245E0",
+    "fwd": "#E0B01F",
+    "sfr-win1ifg100arq1200r4dg0": "#A0E00B",
+    "sfr-win1ifg100arq1200r4dg1": "#A0E00B",
+    "sfr-win1ifg100arq2400r4dg0": "#A0E00B",
+    "sfr-win1ifg100arq2400r4dg1": "#A0E00B",
+    "sfr-win1ifg200arq1200r4dg0": "#A0E00B",
+    "sfr-win1ifg200arq1200r4dg1": "#A0E00B",
+    "sfr-win1ifg200arq2400r4dg0": "#A0E00B",
+    "sfr-win1ifg200arq2400r4dg1": "#A0E00B",
+    "sfr-win1ifg500arq1200r4dg0": "#A0E00B",
+    "sfr-win1ifg500arq1200r4dg1": "#A0E00B",
+    "sfr-win1ifg500arq2400r4dg0": "#A0E00B",
+    "sfr-win1ifg500arq2400r4dg1": "#A0E00B",
+    "sfr-win2ifg100arq1200r4dg0": "#A0E00B",
+    "sfr-win2ifg100arq1200r4dg1": "#A0E00B",
+    "sfr-win2ifg100arq2400r4dg0": "#A0E00B",
+    "sfr-win2ifg100arq2400r4dg1": "#A0E00B",
+    "sfr-win2ifg200arq1200r4dg0": "#A0E00B",
+    "sfr-win2ifg200arq1200r4dg1": "#A0E00B",
+    "sfr-win2ifg200arq2400r4dg0": "#A0E00B",
+    "sfr-win2ifg200arq2400r4dg1": "#A0E00B",
+    "sfr-win2ifg500arq1200r4dg0": "#A0E00B",
+    "sfr-win2ifg500arq1200r4dg1": "#A0E00B",
+    "sfr-win2ifg500arq2400r4dg0": "#A0E00B",
+    "sfr-win2ifg500arq2400r4dg1": "#A0E00B",
+    "sfr-win5ifg100arq1200r4dg0": "#A0E00B",
+    "sfr-win5ifg100arq1200r4dg1": "#A0E00B",
+    "sfr-win5ifg100arq2400r4dg0": "#A0E00B",
+    "sfr-win5ifg100arq2400r4dg1": "#A0E00B",
+    "sfr-win5ifg200arq1200r4dg0": "#A0E00B",
+    "sfr-win5ifg200arq1200r4dg1": "#A0E00B",
+    "sfr-win5ifg200arq2400r4dg0": "#A0E00B",
+    "sfr-win5ifg200arq2400r4dg1": "#A0E00B",
+    "sfr-win5ifg500arq1200r4dg0": "#A0E00B",
+    "sfr-win5ifg500arq1200r4dg1": "#A0E00B",
+    "sfr-win5ifg500arq2400r4dg0": "#A0E00B",
+    "sfr-win5ifg500arq2400r4dg1": "#A0E00B",
+    "e2e": "#E05851",
 }
 MODES_READABLE = {
     "reass": "HWR",
     "fwd": "FF",
-    "sfr-win1ifg100arq1200r4dg0": "SFR (1,100,1200,4,0)",
-    "sfr-win1ifg100arq1200r4dg1": "SFR (1,100,1200,4,1)",
-    "sfr-win1ifg100arq2400r4dg0": "SFR (1,100,2400,4,0)",
-    "sfr-win1ifg100arq2400r4dg1": "SFR (1,100,2400,4,1)",
-    "sfr-win1ifg200arq1200r4dg0": "SFR (1,200,1200,4,0)",
-    "sfr-win1ifg200arq1200r4dg1": "SFR (1,200,1200,4,1)",
-    "sfr-win1ifg200arq2400r4dg0": "SFR (1,200,2400,4,0)",
-    "sfr-win1ifg200arq2400r4dg1": "SFR (1,200,2400,4,1)",
-    "sfr-win1ifg500arq1200r4dg0": "SFR (1,500,1200,4,0)",
-    "sfr-win1ifg500arq1200r4dg1": "SFR (1,500,1200,4,1)",
-    "sfr-win1ifg500arq2400r4dg0": "SFR (1,500,2400,4,0)",
-    "sfr-win1ifg500arq2400r4dg1": "SFR (1,500,2400,4,1)",
-    "sfr-win2ifg100arq1200r4dg0": "SFR (2,100,1200,4,0)",
-    "sfr-win2ifg100arq1200r4dg1": "SFR (2,100,1200,4,1)",
-    "sfr-win2ifg100arq2400r4dg0": "SFR (2,100,2400,4,0)",
-    "sfr-win2ifg100arq2400r4dg1": "SFR (2,100,2400,4,1)",
-    "sfr-win2ifg200arq1200r4dg0": "SFR (2,200,1200,4,0)",
-    "sfr-win2ifg200arq1200r4dg1": "SFR (2,200,1200,4,1)",
-    "sfr-win2ifg200arq2400r4dg0": "SFR (2,200,2400,4,0)",
-    "sfr-win2ifg200arq2400r4dg1": "SFR (2,200,2400,4,1)",
-    "sfr-win2ifg500arq1200r4dg0": "SFR (2,500,1200,4,0)",
-    "sfr-win2ifg500arq1200r4dg1": "SFR (2,500,1200,4,1)",
-    "sfr-win2ifg500arq2400r4dg0": "SFR (2,500,2400,4,0)",
-    "sfr-win2ifg500arq2400r4dg1": "SFR (2,500,2400,4,1)",
-    "sfr-win5ifg100arq1200r4dg0": "SFR (5,100,1200,4,0)",
-    "sfr-win5ifg100arq1200r4dg1": "SFR (5,100,1200,4,1)",
-    "sfr-win5ifg100arq2400r4dg0": "SFR (5,100,2400,4,0)",
-    "sfr-win5ifg100arq2400r4dg1": "SFR (5,100,2400,4,1)",
-    "sfr-win5ifg200arq1200r4dg0": "SFR (5,200,1200,4,0)",
-    "sfr-win5ifg200arq1200r4dg1": "SFR (5,200,1200,4,1)",
-    "sfr-win5ifg200arq2400r4dg0": "SFR (5,200,2400,4,0)",
-    "sfr-win5ifg200arq2400r4dg1": "SFR (5,200,2400,4,1)",
-    "sfr-win5ifg500arq1200r4dg0": "SFR (5,500,1200,4,0)",
-    "sfr-win5ifg500arq1200r4dg1": "SFR (5,500,1200,4,1)",
-    "sfr-win5ifg500arq2400r4dg0": "SFR (5,500,2400,4,0)",
-    "sfr-win5ifg500arq2400r4dg1": "SFR (5,500,2400,4,1)",
+    "sfr-win1ifg100arq1200r4dg0": "SFR",    # " (1,100,1200,4,0)",
+    "sfr-win1ifg100arq1200r4dg1": "SFR",    # " (1,100,1200,4,1)",
+    "sfr-win1ifg100arq2400r4dg0": "SFR",    # " (1,100,2400,4,0)",
+    "sfr-win1ifg100arq2400r4dg1": "SFR",    # " (1,100,2400,4,1)",
+    "sfr-win1ifg200arq1200r4dg0": "SFR",    # " (1,200,1200,4,0)",
+    "sfr-win1ifg200arq1200r4dg1": "SFR",    # " (1,200,1200,4,1)",
+    "sfr-win1ifg200arq2400r4dg0": "SFR",    # " (1,200,2400,4,0)",
+    "sfr-win1ifg200arq2400r4dg1": "SFR",    # " (1,200,2400,4,1)",
+    "sfr-win1ifg500arq1200r4dg0": "SFR",    # " (1,500,1200,4,0)",
+    "sfr-win1ifg500arq1200r4dg1": "SFR",    # " (1,500,1200,4,1)",
+    "sfr-win1ifg500arq2400r4dg0": "SFR",    # " (1,500,2400,4,0)",
+    "sfr-win1ifg500arq2400r4dg1": "SFR",    # " (1,500,2400,4,1)",
+    "sfr-win2ifg100arq1200r4dg0": "SFR",    # " (2,100,1200,4,0)",
+    "sfr-win2ifg100arq1200r4dg1": "SFR",    # " (2,100,1200,4,1)",
+    "sfr-win2ifg100arq2400r4dg0": "SFR",    # " (2,100,2400,4,0)",
+    "sfr-win2ifg100arq2400r4dg1": "SFR",    # " (2,100,2400,4,1)",
+    "sfr-win2ifg200arq1200r4dg0": "SFR",    # " (2,200,1200,4,0)",
+    "sfr-win2ifg200arq1200r4dg1": "SFR",    # " (2,200,1200,4,1)",
+    "sfr-win2ifg200arq2400r4dg0": "SFR",    # " (2,200,2400,4,0)",
+    "sfr-win2ifg200arq2400r4dg1": "SFR",    # " (2,200,2400,4,1)",
+    "sfr-win2ifg500arq1200r4dg0": "SFR",    # " (2,500,1200,4,0)",
+    "sfr-win2ifg500arq1200r4dg1": "SFR",    # " (2,500,1200,4,1)",
+    "sfr-win2ifg500arq2400r4dg0": "SFR",    # " (2,500,2400,4,0)",
+    "sfr-win2ifg500arq2400r4dg1": "SFR",    # " (2,500,2400,4,1)",
+    "sfr-win5ifg100arq1200r4dg0": "SFR",    # " (5,100,1200,4,0)",
+    "sfr-win5ifg100arq1200r4dg1": "SFR",    # " (5,100,1200,4,1)",
+    "sfr-win5ifg100arq2400r4dg0": "SFR",    # " (5,100,2400,4,0)",
+    "sfr-win5ifg100arq2400r4dg1": "SFR",    # " (5,100,2400,4,1)",
+    "sfr-win5ifg200arq1200r4dg0": "SFR",    # " (5,200,1200,4,0)",
+    "sfr-win5ifg200arq1200r4dg1": "SFR",    # " (5,200,1200,4,1)",
+    "sfr-win5ifg200arq2400r4dg0": "SFR",    # " (5,200,2400,4,0)",
+    "sfr-win5ifg200arq2400r4dg1": "SFR",    # " (5,200,2400,4,1)",
+    "sfr-win5ifg500arq1200r4dg0": "SFR",    # " (5,500,1200,4,0)",
+    "sfr-win5ifg500arq1200r4dg1": "SFR",    # " (5,500,1200,4,1)",
+    "sfr-win5ifg500arq2400r4dg0": "SFR",    # " (5,500,2400,4,0)",
+    "sfr-win5ifg500arq2400r4dg1": "SFR",    # " (5,500,2400,4,1)",
     "e2e": "E2E",
 }
 SAVEFIG_OPTS = {
@@ -126,172 +126,16 @@ TIMES_CSV_NAME_PATTERN_FMT = "{}.times.csv".format(parse_results.NAME_PATTERN)
 STATS_CSV_NAME_PATTERN_FMT = "{}.stats.csv".format(parse_results.NAME_PATTERN)
 
 RUNS = 3
-MODES = ["reass", "fwd", "e2e",
-         "sfr-win1ifg100arq1200r4dg0",
-         "sfr-win1ifg100arq1200r4dg1",
-         "sfr-win1ifg100arq2400r4dg0",
-         "sfr-win1ifg100arq2400r4dg1",
-         "sfr-win1ifg200arq1200r4dg0",
-         "sfr-win1ifg200arq1200r4dg1",
-         "sfr-win1ifg200arq2400r4dg0",
-         "sfr-win1ifg200arq2400r4dg1",
-         "sfr-win1ifg500arq1200r4dg0",
-         "sfr-win1ifg500arq1200r4dg1",
-         "sfr-win1ifg500arq2400r4dg0",
-         "sfr-win1ifg500arq2400r4dg1",
-         "sfr-win2ifg100arq1200r4dg0",
-         "sfr-win2ifg100arq1200r4dg1",
-         "sfr-win2ifg100arq2400r4dg0",
-         "sfr-win2ifg100arq2400r4dg1",
-         "sfr-win2ifg200arq1200r4dg0",
-         "sfr-win2ifg200arq1200r4dg1",
-         "sfr-win2ifg200arq2400r4dg0",
-         "sfr-win2ifg200arq2400r4dg1",
-         "sfr-win2ifg500arq1200r4dg0",
-         "sfr-win2ifg500arq1200r4dg1",
-         "sfr-win2ifg500arq2400r4dg0",
-         "sfr-win2ifg500arq2400r4dg1",
-         "sfr-win5ifg100arq1200r4dg0",
-         "sfr-win5ifg100arq1200r4dg1",
-         "sfr-win5ifg100arq2400r4dg0",
-         "sfr-win5ifg100arq2400r4dg1",
-         "sfr-win5ifg200arq1200r4dg0",
-         "sfr-win5ifg200arq1200r4dg1",
-         "sfr-win5ifg200arq2400r4dg0",
-         "sfr-win5ifg200arq2400r4dg1",
-         "sfr-win5ifg500arq1200r4dg0",
-         "sfr-win5ifg500arq1200r4dg1",
-         "sfr-win5ifg500arq2400r4dg0",
-         "sfr-win5ifg500arq2400r4dg1"]
-DATA_LENS = [16, 80, 176, 272, 368, 464, 560, 656,
-             752, 848, 944, 1040, 1136, 1232]
+MODES = [
+     "reass",
+     "fwd",
+     "e2e",
+     "sfr-win1ifg100arq1200r4dg0",
+ ]
+DATA_LENS = [x for x in range(16, 1025, 16)]
 DELAY = 10000
 MAX_HOPS = 7
 BAR_WIDTH = (1 / len(MODES)) - .05
-
-
-def plot_pdr(runs=RUNS):
-    plt.clf()
-    networks = set()
-    for o, mode in enumerate(MODES):
-        pdrs = {s: [] for s in DATA_LENS}
-        for data_len in DATA_LENS:
-            filenames = _get_files(DELAY, mode, data_len, runs,
-                                   TIMES_CSV_NAME_PATTERN_FMT)
-            comp = re.compile(NAME_PATTERN)
-            for _, filename in filenames[-runs:]:
-                filename = os.path.join(DATA_PATH, filename)
-                m = comp.search(filename)
-                assert(m is not None)
-                networks.add(m.group("network"))
-                sends = 0
-                receives = 0
-                with open(filename) as csvfile:
-                    reader = csv.DictReader(csvfile, delimiter=";")
-                    for row in reader:
-                        sends += 1
-                        if row["recv_time"]:
-                            receives += 1
-                    if (sends > 0):
-                        pdrs[data_len].append(100 * receives / sends)
-            pdrs[data_len] = _reject_outliers(pdrs[data_len])
-        means = np.array([np.mean(pdrs[s]) for s in DATA_LENS]) \
-            .astype(np.double)
-        means_mask = np.isfinite(means)
-        errs = np.array([np.std(pdrs[s]) for s in DATA_LENS])
-        index = np.arange(1, len(DATA_LENS) + 1)
-        style = {}
-        style["color"] = COLORS[mode]
-        if means_mask.any():
-            print(mode, means[means_mask])
-            plt.bar(index[means_mask] + (o * BAR_WIDTH) - ((len(MODES) / 2) * BAR_WIDTH),
-                    means[means_mask], BAR_WIDTH, yerr=errs[means_mask],
-                    label=MODES_READABLE[mode], **style)
-    _plot_show_and_save(
-            networks,
-            "pdr",
-            "Reliability",
-            "Average packet delivery rate [%]",
-            runs,
-            (0, 100)
-        )
-
-
-def plot_lat(runs=RUNS):
-    plt.clf()
-    networks = set()
-    mode_legend_elements = []
-    hops_legend_elements = []
-    for o, mode in enumerate(MODES):
-        latencies = {s: [[] for _ in range(MAX_HOPS - 2)] for s in DATA_LENS}
-        for data_len in DATA_LENS:
-            filenames = _get_files(DELAY, mode, data_len, runs,
-                                   TIMES_CSV_NAME_PATTERN_FMT)
-            c = re.compile(NAME_PATTERN)
-            for _, filename in filenames[-runs:]:
-                filename = os.path.join(DATA_PATH, filename)
-                m = c.search(filename)
-                assert(m is not None)
-                networks.add(m.group("network"))
-                with open(filename) as csvfile:
-                    reader = csv.DictReader(csvfile, delimiter=";")
-                    for row in reader:
-                        if not len(row["recv_time"]):
-                            continue
-                        hops = int(row["hops_to_sink"]) - 2
-                        latencies[data_len][hops].append(
-                                1000 * (float(row["recv_time"]) -
-                                        float(row["send_time"]))
-                            )
-            for h in range(MAX_HOPS - 2):
-                latencies[data_len][h] = _reject_outliers(
-                    latencies[data_len][h]
-                )
-        index = np.arange(1, len(DATA_LENS) + 1)
-        style = {}
-        style["edgecolor"] = None
-        style["linewidth"] = 0
-        style["color"] = COLORS[mode]
-        mode_legend_elements.append(
-            Patch(label=MODES_READABLE[mode], **style)
-        )
-        last_means = np.zeros(len(DATA_LENS))
-        hatch = [1.0, 0.8, 0.6, 0.4, 0.2]
-        for h in range(MAX_HOPS - 2):
-            style["alpha"] = hatch[h]
-            if o == 0:
-                hops_legend_style = copy.deepcopy(style)
-                hops_legend_style["color"] = "k"
-                hops_legend_style["linewidth"] = 0
-                hops_legend_elements.append(
-                    Patch(label="{} hops".format(h + 2), **hops_legend_style)
-                )
-            means = np.array([np.mean(latencies[s][h]) for s in DATA_LENS]) \
-                .astype(np.double)
-            errs = np.array([np.std(latencies[s][h]) for s in DATA_LENS])
-            means_mask = np.isfinite(means)
-            plt.bar(index[means_mask] + (o * BAR_WIDTH) - ((len(MODES) / 2) * BAR_WIDTH),
-                    means[means_mask] - last_means[means_mask], BAR_WIDTH,
-                    yerr=errs[means_mask], bottom=last_means[means_mask],
-                    label="{} ({} hops)".format(MODES_READABLE[mode],
-                                                h + 2),
-                    **style)
-            last_means = means
-    ax = plt.gca()
-    ax.set_yscale("symlog")
-    _plot_show_and_save(
-        networks,
-        "lat",
-        "Latency",
-        "Source-to-sink latency [ms]",
-        runs,
-        {"bottom": 0},
-        legends=[
-            {"handles": mode_legend_elements, "loc": "upper left",
-             "bbox_to_anchor": (0.2, 1)},
-            {"handles": hops_legend_elements, "loc": "upper left"},
-        ]
-    )
 
 
 def plot_l2_retrans(runs=RUNS):
@@ -319,13 +163,13 @@ def plot_l2_retrans(runs=RUNS):
                 with open(filename) as csvfile:
                     reader = csv.DictReader(csvfile, delimiter=";")
                     for row in reader:
-                        l2_retrans.append((i, int(row["l2_retrans"] or 0)))
+                        l2_retrans.append((data_len, int(row["l2_retrans"] or 0)))
             means[i - 1] = np.mean(
-                    [l[1] for l in l2_retrans if l[0] == i]
+                    [l[1] for l in l2_retrans if l[0] == data_len]
                 )
         means = np.array(means)
         means_mask = np.isfinite(means)
-        index = np.arange(1, len(DATA_LENS) + 1)
+        index = np.array(DATA_LENS)
         if plt.rcParams["text.usetex"]:
             markeropts = {"markersize": 5}
         else:
@@ -384,20 +228,23 @@ def plot_pktbuf(runs=RUNS):
             .astype(np.double)
         means_mask = np.isfinite(means)
         errs = np.array([np.std(pktbuf[s]) for s in DATA_LENS])
-        index = np.arange(1, len(DATA_LENS) + 1)
+        index = np.array(DATA_LENS)
         style = {}
         style["color"] = COLORS[mode]
         if means_mask.any():
-            plt.bar(index[means_mask] + (o * BAR_WIDTH) - (BAR_WIDTH),
-                    means[means_mask], BAR_WIDTH, yerr=errs[means_mask],
-                    label=MODES_READABLE[mode], **style)
+            plt.fill_between(index[means_mask],
+                             means[means_mask] - errs[means_mask],
+                             means[means_mask] + errs[means_mask],
+                             alpha=.25, linewidth=0, **style)
+            plt.errorbar(index[means_mask], means[means_mask],
+                         label=MODES_READABLE[mode], **style)
     _plot_show_and_save(
             networks,
             "pktbuf",
             "Packet buffer usage",
             "Max. packet buffer usage [%]",
             runs,
-            (0, 100)
+            (0, 75)
         )
 
 
@@ -409,11 +256,11 @@ def plot_rbuf_full(runs=RUNS):
             "fwd_vrb": 0.1,
             "e2e": 0.1,
             "sfr-win1ifg100arq1200r4dg0": 0.2,
-            "sfr_vrb": 0.3,
+            "sfr-win1ifg100arq1200r4dg0_vrb": 0.3,
         }
     networks = set()
     mode_marker = {"fwd": "x", "reass": "+", "e2e": ".", "sfr-win1ifg100arq1200r4dg0": "*",
-                   "fwd_vrb": "v", "sfr_vrb": "^"}
+                   "fwd_vrb": "v", "sfr-win1ifg100arq1200r4dg0_vrb": "^"}
     for mode in MODES:
         rbuf_full = []
         vrb_full = []
@@ -436,7 +283,7 @@ def plot_rbuf_full(runs=RUNS):
                         if row["node"] != sink:
                             if row["rbuf_full"] != "":
                                 rbuf_full.append(
-                                        (i, int(row["rbuf_full"]))
+                                        (size, int(row["rbuf_full"]))
                                     )
                             else:
                                 logging.warn("{}: Incomplete data set, "
@@ -447,7 +294,7 @@ def plot_rbuf_full(runs=RUNS):
                             if mode not in ["reass", "e2e"] and \
                                row["vrb_full"] != "":
                                 vrb_full.append(
-                                        (i, int(row["vrb_full"]))
+                                        (size, int(row["vrb_full"]))
                                     )
                             elif mode not in ["reass", "e2e"] and \
                                  row["vrb_full"] == "":
@@ -456,14 +303,14 @@ def plot_rbuf_full(runs=RUNS):
                                              .format(filename,
                                                      row["node"]))
             rbuf_full_m[i - 1] = np.mean(
-                    [e[1] for e in rbuf_full if e[0] == i]
+                    [e[1] for e in rbuf_full if e[0] == size]
                 )
             vrb_full_m[i - 1] = np.mean(
-                    [e[1] for e in vrb_full if e[0] == i]
+                    [e[1] for e in vrb_full if e[0] == size]
                 )
         means = np.array(rbuf_full_m)
         means_mask = np.isfinite(means)
-        index = np.arange(1, len(DATA_LENS) + 1)
+        index = np.array(DATA_LENS)
         if plt.rcParams["text.usetex"]:
             markeropts = {"markersize": 5}
         else:
@@ -589,20 +436,20 @@ def _reject_outliers(data, m=2):
 
 def _plot_show_and_save(networks, plotname, title, ylabel, runs,
                         ylim=None, legends=None):
-    plt.xlim(0.5, len(DATA_LENS) + .5)
+    plt.xlim(16, DATA_LENS[-1])
     if ylim is not None:
         if issubclass(type(ylim), dict):
             plt.ylim(**ylim)
         else:
             plt.ylim(*ylim)
-    plt.xticks(range(1, len(DATA_LENS) + 1))
+    plt.xticks(DATA_LENS[0:len(DATA_LENS):8] + [1024])
     if plt.rcParams["text.usetex"]:
-        plt.xlabel(r"Fragments [\#]")
+        plt.xlabel(r"UDP payload length [bytes]")
         plt.ylabel(ylabel.replace("%", r"\%"))
         plt.ylabel(ylabel.replace("#", r"\#"))
     else:
         plt.title(title)
-        plt.xlabel("Fragments [#]")
+        plt.xlabel("UDP payload length [bytes]")
         plt.ylabel(ylabel)
     if legends:
         legs = []
@@ -622,7 +469,7 @@ def _plot_show_and_save(networks, plotname, title, ylabel, runs,
             legend_params["ncol"] = 2
         plt.legend(**legend_params)
     filename = "{}.{}.{}".format(
-            os.path.join(DATA_PATH, ",".join(networks)),
+            os.path.join(DATA_PATH, ",".join(sorted(networks))),
             plotname, "pgf" if plt.rcParams["text.usetex"] else "svg"
         )
     _savefig(filename)
@@ -639,7 +486,7 @@ def _savefig(filename):
 
 def _configure_plot(pgf=False, figsize=100):
     plt.rc("errorbar", capsize=3)
-    SAVEFIG_OPTS["figsize"] = (100, 10)
+    SAVEFIG_OPTS["figsize"] = (100, 80)
     if pgf:
         normalsize = 10 * (figsize / 100)
         scriptsize = 7 * (figsize / 100)
@@ -684,8 +531,6 @@ def _check_logs():
 
 
 PLOT_FUNCTIONS = {
-    "pdr": plot_pdr,
-    "lat": plot_lat,
     "l2_retrans": plot_l2_retrans,
     "pktbuf": plot_pktbuf,
     "rbuf_full": plot_rbuf_full,
