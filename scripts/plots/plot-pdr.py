@@ -11,6 +11,7 @@ import re
 import os
 import numpy as np
 import matplotlib
+matplotlib.use("pgf")
 from matplotlib.ticker import MultipleLocator
 import matplotlib.pyplot as plt
 
@@ -90,14 +91,13 @@ def heatmap(data, row_labels, col_labels, ax=None,
 
     # Create colorbar
     cbar_kw["orientation"] = "vertical"
-    cbar_kw["shrink"] = .27
+    cbar_kw["shrink"] = .25
     cbar_kw["aspect"] = 15
-    cbar_kw["pad"] = 0
-    cbar_kw["ticks"] = [0, 25, 50, 100]
-    cbar_kw["panchor"] = (-1.0, 1.1)
+    cbar_kw["pad"] = .01
+    cbar_kw["anchor"] = (0, 1)
     cbar = ax.figure.colorbar(im, ax=ax, **cbar_kw)
-    cbar.ax.set_ylabel(cbarlabel, fontsize=4)
-    cbar.ax.tick_params(labelsize=6)
+    cbar.ax.set_ylabel(cbarlabel, fontsize=6)
+    cbar.ax.tick_params(labelsize=5)
 
     ax.xaxis.set_major_locator(MultipleLocator(1))
     # We want to show all ticks...
@@ -182,7 +182,14 @@ def annotate_heatmap(im, data=None, valfmt="{x:.2f}",
     return texts
 
 
-matplotlib.rcParams["axes.labelsize"] = 8
+matplotlib.rcParams["axes.labelsize"] = 6
+matplotlib.rcParams["text.usetex"] = True
+matplotlib.rcParams["pgf.rcfonts"] = False
+matplotlib.rcParams["font.family"] = "serif"
+matplotlib.rcParams["pgf.preamble"] = "\n".join([
+     "\\usepackage{units}",          # load additional packages
+     "\\usepackage{metalogo}",
+ ])
 runs = 3
 _check_logs()
 plt.clf()
@@ -244,5 +251,5 @@ ax.xaxis.set_label_position('top')
 plt.ylabel("Mode")
 
 fig.tight_layout()
-plt.savefig(os.path.join(DATA_PATH, "{}.pdr_hm.svg".format(",".join(networks))), bbox_inches="tight")
-plt.show()
+plt.savefig(os.path.join(DATA_PATH, "{}.pdr_hm.pdf".format(",".join(networks))), bbox_inches="tight")
+plt.savefig(os.path.join(DATA_PATH, "{}.pdr_hm.pgf".format(",".join(networks))), bbox_inches="tight")
