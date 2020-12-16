@@ -1,15 +1,22 @@
-# Scripts to process and plot experiment results
+# Scripts to process and plot experiment results for Section IV
 
 ## Overview
 
 The scripts in this directory serve the processing and plotting of the
-experiment results
+experiment results as described in Section IV. COMPARISON OF FRAGMENT
+FORWARDING METHODS.
 
 `parse_results.py` transform the logs from the [experiment
 runs](../experiment_ctrl) into easier to work with CSV files.
 
-`plot_results.py` then takes these CSV files and generates the plots you can see
-in the paper from them.
+`plot_results.py` then takes these CSV files and generates a number of plots you
+can see in the paper from them.
+
+`plot_lat.py` to plot the 3D CDFs for the latencies as seen in the paper.
+
+`plot_pdr.py` to generate a heatmap of the PDRs.
+
+`plot_pdr2.py` to generate the PDR plots seen in the paper.
 
 ## Requirements
 The scripts assume they are run with Python 3.
@@ -74,7 +81,7 @@ added to the logs during your execution of `plot_results.py`.
 For more information on the script, see
 
 ```sh
-./plot_results.py
+./plot_results.py -h
 ```
 
 #### Environment variables
@@ -82,4 +89,46 @@ For more information on the script, see
   stored.
 
 For on-the-fly CSV generation you also can set the environment variables used by
-[`parse_results.py`][#parse_results.py]
+[`parse_results.py`](#parse_results.py)
+
+### `plot-lat.py`
+This script plots a 3D latency CDF generated from the CSV files created with
+[`parse_results.py`](#parse_resultspy).
+
+It takes no parameters:
+
+```sh
+./plot-lat.py
+```
+
+#### Environment variables
+- `DATA_PATH`: (default: `./../../results`) Path where the logs to consider are
+  stored.
+
+### `plot-pdr.py`
+This script plots a PDR heatmap generated from the CSV files created with
+[`parse_results.py`](#parse_resultspy).
+
+It takes no parameters:
+
+```sh
+./plot-pdr.py
+```
+
+#### Environment variables
+- `DATA_PATH`: (default: `./../../results`) Path where the logs to consider are
+  stored.
+
+### `plot-pdr2.py`
+This script plots the PDR as a line plot generated from the CSV files created
+with [`parse_results.py`](#parse_resultspy) as seen in the paper.
+
+It takes no parameters:
+
+```sh
+./plot-pdr2.py
+```
+
+#### Environment variables
+- `DATA_PATH`: (default: `./../../results`) Path where the logs to consider are
+  stored.
