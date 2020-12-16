@@ -28,7 +28,7 @@ GLOBAL_PREFIX = os.environ.get("GLOBAL_PREFIX", "2001:db8:0:1:")
 
 NAME_PATTERN = r"6lo_comp_" \
                r"n(?P<network>m3-\d+x[0-9a-f]+)_c\d+__" \
-               r"m{mode}_r{data_len}Bx\d+x{delay}ms_(?P<timestamp>\d+)"
+               r"m{mode}_r{data_len}Bx(?P<count>\d+)x{delay}ms_(?P<timestamp>\d+)"
 LOG_NAME_PATTERN = r"{}\.log".format(NAME_PATTERN.format(
     mode=r"(?P<mode>(reass|fwd|e2e|sfr-\w+))",
     data_len=r"(?P<data_len>\d+)",
@@ -159,7 +159,8 @@ def _write_csvs(times, times_csvfile, stats, stats_csvfile, graph, sink):
         stats_csv.writerow(row)
 
 
-def log_to_csvs(logname, network, mode, data_len, data_path=DATA_PATH):
+def log_to_csvs(logname, network, mode, data_len, data_path=DATA_PATH,
+                count=50):
     logging.info("Converting {} to CSVs".format(logname))
     logging.info(" - {}".format(stats_csvname(logname)))
     logging.info(" - {}".format(times_csvname(logname)))
