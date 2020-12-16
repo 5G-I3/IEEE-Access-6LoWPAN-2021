@@ -10,6 +10,8 @@ import csv
 import re
 import os
 import math
+import matplotlib
+matplotlib.use("pgf")
 from matplotlib.colors import hsv_to_rgb
 from matplotlib.lines import Line2D
 import matplotlib.figure
@@ -102,6 +104,21 @@ def hop_lat(num):
     return [6 for _ in range(num)]
 
 
+matplotlib.rcParams["figure.figsize"] = (4, 3)
+matplotlib.rcParams["text.usetex"] = True
+matplotlib.rcParams["pgf.texsystem"] = "xelatex"
+matplotlib.rcParams["pgf.rcfonts"] = False
+matplotlib.rcParams["font.family"] = "serif"
+matplotlib.rcParams["font.serif"] = "Libertine"
+matplotlib.rcParams["pgf.preamble"] = "\n".join([
+     "\\usepackage{units}",          # load additional packages
+     "\\usepackage{metalogo}",
+     r'\usepackage{fontspec}',
+     r'\setmainfont{Linux Libertine}',
+     r'\setmonofont{Linux Libertine Mono}',
+     r'\usepackage{unicode-math}',
+     r'\setmathfont{Linux Libertine}'
+ ])
 runs = 3
 _check_logs()
 plt.clf()
@@ -201,7 +218,7 @@ for o, mode in enumerate(MODES):
             if (frag_num + 1) < len(MODES_BINS[mode]):
                 limits = (MODES_BINS[mode][frag_num],
                           MODES_BINS[mode][frag_num + 1])
-            elif len(MODES_BINS[mode]) < 11:
+            elif len(MODES_BINS[mode]) < 12:
                 limits = (MODES_BINS[mode][frag_num],
                           "?")
             else:
@@ -221,7 +238,7 @@ for o, mode in enumerate(MODES):
             if h == 0:
                 frags_legend_elements[frag_num] = \
                     Line2D([0], [0], label="{} ({}{} bytes)"
-                           .format(frag_num + 1, "≤"
+                           .format(frag_num + 1, "$\leq$"
                                    if (limits == "?" or limits[1] == 1024)
                                    else "<", limits[1]),
                            **style)
@@ -249,23 +266,22 @@ for o, mode in enumerate(MODES):
             dx = x[1] - x[0]
             cumsum = np.cumsum(hist) * dx
             subplot.plot(x[1:], [h + 2 for _ in range(len(x) - 1)], cumsum, **style)
-            if (x_exp.shape[0] >= 2):
-                dx_exp = x_exp[1] - x_exp[0]
-                cumsum_exp = np.cumsum(hist_exp) * dx_exp
-                subplot.plot(x_exp[1:], [h + 2 for _ in range(len(x_exp) - 1)],
-                             cumsum_exp, **exp_style)
-    plt.setp(subplot.get_xticklabels(), fontsize=8)
-    plt.setp(subplot.get_yticklabels(), fontsize=8)
-    plt.setp(subplot.get_zticklabels(), fontsize=8)
+    plt.setp(subplot.get_xticklabels())
+    plt.setp(subplot.get_yticklabels())
+    plt.setp(subplot.get_zticklabels())
     if mode.startswith("sfr"):
         subplot.set_xlim((0, 35000))
-        subplot.set_xticks(list(subplot.get_xticks()) + [700])
-        xlabels = ["{:.1f}".format(x) for x in subplot.get_xticks() / 1000]
-        subplot.set_xticklabels([""] + xlabels[1:])
-        subplot.set_xlabel("Latency [s]", fontsize=8)
+        subplot.set_xticks([0, 10000, 20000, 30000, 700])
     else:
+        subplot.set_xticks([0, 300, 500, 700])
         subplot.set_xlim((0, 700))
-        subplot.set_xlabel("Latency [ms]", fontsize=8)
+    xlabels = ["{:.1f}".format(x) for x in subplot.get_xticks() / 1000]
+    print(mode, xlabels)
+    if mode.startswith("sfr"):
+        subplot.set_xticklabels([""] + xlabels[1:])
+    else:
+        subplot.set_xticklabels(xlabels)
+    subplot.set_xlabel("Latency [s]")
     subplot.xaxis.pane.fill = False
     subplot.yaxis.pane.fill = False
     subplot.zaxis.pane.fill = False
@@ -274,23 +290,17 @@ for o, mode in enumerate(MODES):
     subplot.zaxis.pane.set_edgecolor("lightgray")
     subplot.grid(True, color="lightgray")
     subplot.set_zlim((0, 1))
-    subplot.set_zlabel("CDF", fontsize=8)
+    subplot.set_zlabel("CDF")
     subplot.set_ylim((2, MAX_HOPS))
-    subplot.set_ylabel("Source-to-sink distance [hops]", fontsize=8)
+    subplot.set_ylabel("Source-to-sink distance [hops]")
     anchor = (1.01, 1.3)
-    subplot.add_artist(
-        subplot.legend(frags_legend_elements,
-                       [e.get_label() for e in frags_legend_elements],
-                       title="Number of Fragments",
-                       loc="upper center", ncol=6,# bbox_to_anchor=anchor,
-                       fontsize=8, title_fontsize=8, bbox_to_anchor=(.5,-.1))
-    )
     plt.tight_layout()
     plt.savefig(os.path.join(DATA_PATH,
-                             "{}.{}.lat_cdf.svg"
-                             .format(",".join(networks), mode)),
+                             "{}.{}.lat_cdf.pdf"
+                             .format(",".join(sorted(networks)), mode)),
                 bbox_inches="tight")
-    plt.show()
+    plt.savefig(os.path.join(DATA_PATH,
+                             "{}.{}.lat_cdf.pgf"
+                             .format(",".join(sorted(networks)), mode)),
+                bbox_inches="tight")
 anchor = (.5, 1.2)
-# fig.tight_layout()
-# plt.show()
