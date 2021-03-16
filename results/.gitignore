@@ -1,3 +1,9 @@
 nodes.csv
+*.cong.csv
+*.edgelist.gz
 *.log
 *.pcap
+*.pdf
+*.pgf
+*.stats.csv
+*.times.csv
