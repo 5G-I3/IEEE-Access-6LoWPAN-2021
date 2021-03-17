@@ -3,6 +3,7 @@ nodes.csv
 *.edgelist.gz
 *.log
 *.pcap
+*.pcap.gz
 *.pdf
 *.pgf
 *.stats.csv
