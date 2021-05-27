@@ -37,7 +37,9 @@
 #define UDP_COUNT   (200)
 #endif
 
+#if APP_LOG_ENABLE
 mutex_t app_output_mutex;
+#endif
 
 static uint8_t sock_inbuf[1232U];
 static uint8_t sock_outbuf[1232U];

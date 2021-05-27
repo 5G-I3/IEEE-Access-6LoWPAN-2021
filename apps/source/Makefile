@@ -27,7 +27,6 @@ USEMODULE += netstats_l2
 USEMODULE += netstats_ipv6
 USEMODULE += netstats_rpl
 
-USEMODULE += gnrc_pktbuf_cmd
 USEMODULE += shell
 USEMODULE += shell_commands
 
@@ -79,6 +78,12 @@ endif
 
 DEVELHELP ?= 1
 
+ifeq (1, $(DEVELHELP))
+  USEMODULE += gnrc_pktbuf_cmd      # include `pktbuf` shell command
+endif
+
+APP_LOG ?= 1                # Enable logging of congestion events
+
 PKTBUF_SIZE ?= 40960        # Packet buffer size
 NETIF_SEND_QUEUE_SIZE ?= 8  # Network interface send queue size
 FB_SIZE ?= 4                # Fragmentation buffer size
@@ -96,10 +101,12 @@ SFR_ECN_DEN ?= 2            # Denominator for ECN threshold fraction
 UDP_COUNT ?= 200            # Number of packets to send
 
 CFLAGS += -DUDP_COUNT=$(UDP_COUNT)
-CFLAGS += -DDEBUG_ASSERT_VERBOSE=1
+CFLAGS += -DAPP_LOG_ENABLE=$(APP_LOG)
+CFLAGS += -DDEBUG_ASSERT_VERBOSE=1    # activate verbose output on assert
 
 # Expose environment variable to build docker image
 DOCKER_ENV_VARS += DEVELHELP
+DOCKER_ENV_VARS += APP_LOG
 DOCKER_ENV_VARS += MODE
 DOCKER_ENV_VARS += CONGURE_IMPL
 DOCKER_ENV_VARS += PKTBUF_SIZE

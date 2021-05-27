@@ -25,10 +25,14 @@ extern "C" {
 
 extern mutex_t app_output_mutex;
 
+#if APP_LOG_ENABLE
 #define APP_LOG(...) \
     mutex_lock(&app_output_mutex); \
     printf(__VA_ARGS__); \
     mutex_unlock(&app_output_mutex)
+#else
+#define APP_LOG(...)
+#endif
 
 #ifdef __cplusplus
 }
