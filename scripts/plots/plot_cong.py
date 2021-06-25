@@ -34,19 +34,19 @@ CONGS_HUMAN_READABLE = {
     'cx': 'Fragment buffer destroyed'
 }
 CONG_STYLES = {
-    'cs': {'color': 'black', 'marker': '|', 'markersize': 5},
-    'ct': {'color': 'black', 'marker': '.', 'markersize': 6, 'markeredgewidth': 0},
-    'ca': {'color': 'black', 'marker': 'v', 'markersize': 5, 'markeredgewidth': 0},
-    'cl': {'color': 'black', 'marker': 'x', 'markersize': 4},
-    'ce': {'color': 'black', 'marker': '*', 'markersize': 5, 'markeredgewidth': 0},
-    'cx': {'color': 'black', 'marker': 'd', 'markersize': 5, 'markeredgewidth': 0},
+    'cs': {'color': 'C0', 'marker': '|', 'markersize': 5},
+    'ct': {'color': 'C1', 'marker': '.', 'markersize': 6, 'markeredgewidth': 0},
+    'ca': {'color': 'C2', 'marker': 'v', 'markersize': 5, 'markeredgewidth': 0},
+    'cl': {'color': 'C3', 'marker': 'x', 'markersize': 4},
+    'ce': {'color': 'C4', 'marker': '*', 'markersize': 5, 'markeredgewidth': 0},
+    'cx': {'color': 'C5', 'marker': 'd', 'markersize': 5, 'markeredgewidth': 0},
 }
 CWND_STYLE = {
-    'color': 'black',
+    'color': 'C0',
 }
 IFG_STYLE = {
-    'color': 'black',
-    'linestyle': 'dashed',
+    'color': 'C2',
+    # 'linestyle': 'dashed',
 }
 
 

@@ -1,0 +1,15 @@
+# See https://matplotlib.org/stable/tutorials/introductory/customizing.html#a-sample-matplotlibrc-file
+axes.prop_cycle: cycler('color', ['2245E0', 'E0B01F', 'E05851', 'A0E00B', '9E66FF', '995300'])
+axes.titlesize : medium
+figure.figsize : 5.13, 2.05
+font.family : serif
+legend.loc : upper right
+# legend.fontsize : small
+patch.edgecolor : white
+patch.force_edgecolor : True
+hatch.color : white
+hatch.linewidth : 0.5
+# patch.linewidth : 1
+pgf.rcfonts : True
+pgf.texsystem : xelatex
+text.usetex : True

@@ -90,8 +90,8 @@ SIZES = {
 }
 WIDTH = 0.4
 COLORS = {
-    'w/ CongURE': 'white',
-    'unrolled': 'lightgray',
+    'w/ CongURE': 'C0',
+    'unrolled': 'C1',
 }
 HATCH = {
     'SFR': '//',
@@ -153,7 +153,7 @@ def plot_sizes():
             group_legend = plt.legend(handles=group_elements, loc='upper right',
                                       fontsize='small')
             ax.add_artist(group_legend)
-            module_elements = [Patch(label=module, facecolor='white',
+            module_elements = [Patch(label=module, facecolor='gray',
                                     hatch=HATCH[module])
                                for module in ['SFR', 'FB', 'CongURE']]
             module_legend = plt.legend(handles=module_elements, loc='upper left',

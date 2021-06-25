@@ -89,7 +89,7 @@ WIDTH = 0.22
 
 
 def set_style():
-    plt.style.use('miri_ieee.mplstyle')
+    plt.style.use('miri_ieee_access.mplstyle')
     matplotlib.rcParams["pgf.preamble"] = "\n".join([
         r'\usepackage{units}',          # load additional packages
         r'\usepackage{metalogo}',
