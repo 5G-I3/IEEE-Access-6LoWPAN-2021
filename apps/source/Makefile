@@ -37,42 +37,53 @@ USEMODULE += random
 
 # configure experiment mode
 # - hwr: hop-wise reassembly (HWR)
+# - ff: fragment forwarding (FF)
+# - e2e: IPv6 (end-to-end) fragmentation (E2E)
 # - sfr: selective fragment recovery (SFR)
-MODE ?= sfr
+MODE ?= hwr
 
-ifeq (sfr, $(MODE))
-  USEMODULE += gnrc_sixlowpan_frag_sfr
-  USEMODULE += gnrc_sixlowpan_frag_sfr_stats
-  USEMODULE += gnrc_sixlowpan_frag_sfr_ecn_if_in
-  USEMODULE += gnrc_sixlowpan_frag_sfr_ecn_if_out
-  USEMODULE += gnrc_sixlowpan_frag_sfr_ecn_fqueue
+ifeq (ff,$(MODE))
+  USEMODULE += gnrc_sixlowpan_frag_minfwd
+else
+  ifeq (sfr,$(MODE))
+    USEMODULE += gnrc_sixlowpan_frag_sfr
+    USEMODULE += gnrc_sixlowpan_frag_sfr_stats
 
-  ifeq (,$(CONGURE_IMPL))
-    USEMODULE += gnrc_sixlowpan_frag_sfr_congure_sfr
-  else
-    ifeq (congure_abe,$(CONGURE_IMPL))
-      USEMODULE += gnrc_sixlowpan_frag_sfr_congure_abe
-    else
-      ifeq (congure_quic,$(CONGURE_IMPL))
-        USEMODULE += gnrc_sixlowpan_frag_sfr_congure_quic
-        USEMODULE += ztimer_msec
-        USEMODULE += ztimer_periph_rtt
+    ifneq (,$(filter congure_%,$(CONGURE_IMPL)))
+      APP_LOG ?= 1                # Enable logging of congestion events
+
+      USEMODULE += gnrc_sixlowpan_frag_sfr_ecn_if_in
+      USEMODULE += gnrc_sixlowpan_frag_sfr_ecn_if_out
+      USEMODULE += gnrc_sixlowpan_frag_sfr_ecn_fqueue
+      ifeq (congure_abe,$(CONGURE_IMPL))
+        USEMODULE += gnrc_sixlowpan_frag_sfr_congure_abe
       else
-        ifeq (congure_reno,$(CONGURE_IMPL))
-          USEMODULE += gnrc_sixlowpan_frag_sfr_congure_reno
+        ifeq (congure_quic,$(CONGURE_IMPL))
+          USEMODULE += gnrc_sixlowpan_frag_sfr_congure_quic
+          USEMODULE += ztimer_msec
+          USEMODULE += ztimer_periph_rtt
         else
-          ifeq (congure_sfr,$(CONGURE_IMPL))
-            USEMODULE += gnrc_sixlowpan_frag_sfr_congure_sfr
+          ifeq (congure_reno,$(CONGURE_IMPL))
+            USEMODULE += gnrc_sixlowpan_frag_sfr_congure_reno
           else
-            $(error "Unknown CongURE implementation `$(CONGURE_IMPL)`")
+            ifeq (congure_sfr,$(CONGURE_IMPL))
+              USEMODULE += gnrc_sixlowpan_frag_sfr_congure_sfr
+            else
+              $(error "Unknown CongURE implementation `$(CONGURE_IMPL)`")
+            endif
           endif
         endif
       endif
     endif
-  endif
-else
-  ifneq (hwr,$(MODE))
-    $(error "Unknown mode `$(MODE)`")
+  else
+    ifeq (e2e,$(MODE))
+      USEMODULE += gnrc_ipv6_ext_frag
+      USEMODULE += gnrc_ipv6_ext_frag_stats
+    else
+      ifneq (hwr,$(MODE))
+        $(error "Unknown mode `$(MODE)`")
+      endif
+    endif
   endif
 endif
 
@@ -82,11 +93,18 @@ ifeq (1, $(DEVELHELP))
   USEMODULE += gnrc_pktbuf_cmd      # include `pktbuf` shell command
 endif
 
-APP_LOG ?= 1                # Enable logging of congestion events
+APP_LOG ?= 0                # Disable logging of congestion events
 
-PKTBUF_SIZE ?= 40960        # Packet buffer size
-NETIF_SEND_QUEUE_SIZE ?= 8  # Network interface send queue size
-FB_SIZE ?= 4                # Fragmentation buffer size
+ifeq (sfr,$(MODE))
+  ifneq (,$(filter congure_%,$(CONGURE_IMPL)))
+    PKTBUF_SIZE ?= 40960        # Packet buffer size
+    NETIF_SEND_QUEUE_SIZE ?= 8  # Network interface send queue size
+    FB_SIZE ?= 4                # Fragmentation buffer size
+  endif
+endif
+PKTBUF_SIZE ?= 6144         # Packet buffer size (default)
+NETIF_SEND_QUEUE_SIZE ?= 64 # Network interface send queue size
+FB_SIZE ?= 64               # Fragmentation buffer size
 RB_SIZE ?= 1                # Reassembly buffer size
 RB_TIMEOUT ?= 10000000      # Reassembly buffer timeout (10s)
 RB_DEL_TIMER ?= 250         # Deletion timer for reassembly buffer entry after datagram completion
@@ -135,14 +153,26 @@ endif
 ifndef CONFIG_GNRC_NETIF_PKTQ_POOL_SIZE
   CFLAGS += -D"CONFIG_GNRC_NETIF_PKTQ_POOL_SIZE"=$(NETIF_SEND_QUEUE_SIZE)
 endif
-ifndef CONFIG_GNRC_SIXLOWPAN_FRAG_FB_SIZE
-  CFLAGS += -D"CONFIG_GNRC_SIXLOWPAN_FRAG_FB_SIZE"=$(FB_SIZE)
-endif
-ifndef CONFIG_GNRC_SIXLOWPAN_FRAG_RBUF_SIZE
-  CFLAGS += -D"CONFIG_GNRC_SIXLOWPAN_FRAG_RBUF_SIZE"=$(RB_SIZE)
-endif
-ifndef CONFIG_GNRC_SIXLOWPAN_FRAG_RBUF_TIMEOUT_US
-  CFLAGS += -D"CONFIG_GNRC_SIXLOWPAN_FRAG_RBUF_TIMEOUT_US"=$(RB_TIMEOUT)
+ifeq (e2e,$(MODE))
+  ifndef CONFIG_GNRC_IPV6_EXT_FRAG_SEND_SIZE
+    CFLAGS += -D"CONFIG_GNRC_IPV6_EXT_FRAG_SEND_SIZE"=$(FB_SIZE)
+  endif
+  ifndef CONFIG_GNRC_IPV6_EXT_FRAG_RBUF_SIZE
+    CFLAGS += -D"CONFIG_GNRC_IPV6_EXT_FRAG_RBUF_SIZE"=$(RB_SIZE)
+  endif
+  ifndef CONFIG_GNRC_IPV6_EXT_FRAG_RBUF_TIMEOUT_US
+    CFLAGS += -D"CONFIG_GNRC_IPV6_EXT_FRAG_RBUF_TIMEOUT_US"=$(RB_TIMEOUT)
+  endif
+else
+  ifndef CONFIG_GNRC_SIXLOWPAN_FRAG_FB_SIZE
+    CFLAGS += -D"CONFIG_GNRC_SIXLOWPAN_FRAG_FB_SIZE"=$(FB_SIZE)
+  endif
+  ifndef CONFIG_GNRC_SIXLOWPAN_FRAG_RBUF_SIZE
+    CFLAGS += -D"CONFIG_GNRC_SIXLOWPAN_FRAG_RBUF_SIZE"=$(RB_SIZE)
+  endif
+  ifndef CONFIG_GNRC_SIXLOWPAN_FRAG_RBUF_TIMEOUT_US
+    CFLAGS += -D"CONFIG_GNRC_SIXLOWPAN_FRAG_RBUF_TIMEOUT_US"=$(RB_TIMEOUT)
+  endif
 endif
 ifndef CONFIG_GNRC_SIXLOWPAN_FRAG_RBUF_DO_NOT_OVERRIDE=1
   CFLAGS += -D"CONFIG_GNRC_SIXLOWPAN_FRAG_RBUF_DO_NOT_OVERRIDE"=1
@@ -152,6 +182,11 @@ ifndef CONFIG_GNRC_SIXLOWPAN_FRAG_RBUF_DEL_TIMER
 endif
 ifndef CONFIG_GNRC_SIXLOWPAN_FRAG_VRB_SIZE
   CFLAGS += -D"CONFIG_GNRC_SIXLOWPAN_FRAG_VRB_SIZE"=$(VRB_SIZE)
+endif
+ifndef CONFIG_GNRC_SIXLOWPAN_SFR_MAX_WIN_SIZE
+  ifeq (,$(filter congure_%,$(CONGURE_IMPL)))
+    CFLAGS += -D"CONFIG_GNRC_SIXLOWPAN_SFR_MAX_WIN_SIZE"=$(SFR_INIT_WIN_SIZE)
+  endif
 endif
 ifndef CONFIG_GNRC_SIXLOWPAN_SFR_OPT_WIN_SIZE
   CFLAGS += -D"CONFIG_GNRC_SIXLOWPAN_SFR_OPT_WIN_SIZE"=$(SFR_INIT_WIN_SIZE)

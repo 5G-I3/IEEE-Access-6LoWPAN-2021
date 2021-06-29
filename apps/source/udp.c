@@ -125,14 +125,14 @@ static int udp_send(char *addr_str, int data_len, int delay)
             last_wakeup = xtimer_now();
         }
         if ((res = sock_udp_send(&sock, sock_outbuf, data_len, &dst)) < 0) {
-            APP_LOG("error;%02x%02x;%d;%02x%02x\n", dst.addr.ipv6[14],
-                    dst.addr.ipv6[15], -res, sock_outbuf[0],
-                    sock_outbuf[1]);
+            printf("error;%02x%02x;%d;%02x%02x\n", dst.addr.ipv6[14],
+                   dst.addr.ipv6[15], -res, sock_outbuf[0],
+                   sock_outbuf[1]);
         }
         else {
-            APP_LOG("send;%02x%02x;%d;%02x%02x\n", dst.addr.ipv6[14],
-                    dst.addr.ipv6[15], res, sock_outbuf[0],
-                    sock_outbuf[1]);
+            printf("send;%02x%02x;%d;%02x%02x\n", dst.addr.ipv6[14],
+                   dst.addr.ipv6[15], res, sock_outbuf[0],
+                   sock_outbuf[1]);
         }
     }
     return 0;
