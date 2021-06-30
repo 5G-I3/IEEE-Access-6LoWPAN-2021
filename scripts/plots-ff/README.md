@@ -18,7 +18,7 @@ The following python packages are required (version numbers indicate tested
 versions):
 
 - `matplotlib` v3.1
-- `networkx` v2.3
+- `networkx` v2.5
 
 The required packages are listed in `requirements.txt` and can be installed
 using

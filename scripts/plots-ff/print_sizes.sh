@@ -20,7 +20,7 @@ arq=${3:-1200}
 frag=${4:-4}
 dg=${5:-0}
 
-for mode in reass fwd sfr; do
+for mode in hwr ff sfr; do
     echo "${mode}"
     MODE=${mode} WIN_SIZE=${win} INTER_FRAME_GAP=${ifg} RIOT_CI_BUILD=1 \
         RETRY_TIMEOUT=${arq} RETRIES=${frag} DATAGRAM_RETRIES=${dg} WERROR=0 \

@@ -24,7 +24,7 @@ from plot_results import DATA_PATH, DELAY, NAME_PATTERN, \
 
 DATA_LENS = tuple(range(16, 1025, 16))
 MODES = [
-    "reass",
+    "hwr",
     "sfr-win1ifg500arq1200r4dg0",
     "sfr-win1ifg100arq1200r4dg0",
     "sfr-win1ifg500arq2400r4dg0",
@@ -33,12 +33,12 @@ MODES = [
     "sfr-win5ifg500arq1200r4dg0",
     "sfr-win5ifg100arq2400r4dg0",
     "sfr-win5ifg500arq2400r4dg0",
-    "fwd",
+    "ff",
     "e2e",
 ]
 MODES_READABLE = {
-    "reass": "HWR",
-    "fwd": "FF",
+    "hwr": "HWR",
+    "ff": "FF",
     "sfr-win1ifg100arq1200r4dg0": "SFR",
     "sfr-win1ifg100arq2400r4dg0": "SFR",
     "sfr-win1ifg500arq1200r4dg0": "SFR",
@@ -50,8 +50,8 @@ MODES_READABLE = {
     "e2e": "E2E",
 }
 MODES_STYLES = {
-    "reass": {"color": "#2245E0"},
-    "fwd": {"color": "#E0B01F"},
+    "hwr": {"color": "#2245E0"},
+    "ff": {"color": "#E0B01F"},
     "sfr-win1ifg100arq1200r4dg0": {"color": "#A0E00B",
                                    "linewidth": 1, "dashes": (None, None)},
     "sfr-win1ifg100arq2400r4dg0": {"color": "#A0E00B",
@@ -71,7 +71,7 @@ MODES_STYLES = {
     "e2e": {"color": "#E05851"},
 }
 MODES_PLOTS = {
-    "non-sfr": ["reass", "fwd", "e2e"],
+    "non-sfr": ["hwr", "ff", "e2e"],
     "sfr-win1": [],
     "sfr-win5": [],
 }

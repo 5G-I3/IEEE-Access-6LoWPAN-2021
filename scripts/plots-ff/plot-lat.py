@@ -28,8 +28,8 @@ from plot_results import DATA_PATH, DELAY, NAME_PATTERN, MAX_HOPS, \
 
 DATA_LENS = tuple(range(16, 1025, 16))
 MODES = [
-    "reass",
-    "fwd",
+    "hwr",
+    "ff",
     "e2e",
     "sfr-win1ifg500arq1200r4dg0",
     "sfr-win1ifg100arq1200r4dg0",
@@ -41,8 +41,8 @@ MODES = [
     "sfr-win5ifg500arq2400r4dg0",
 ]
 MODES_READABLE = {
-    "reass": "HWR",
-    "fwd": "FF",
+    "hwr": "HWR",
+    "ff": "FF",
     "e2e": "E2E",
     "sfr-win1ifg100arq1200r4dg0": "SFR (W:1,G:0.1ms,A:1.2s)",
     "sfr-win1ifg100arq2400r4dg0": "SFR (W:1,G:0.1ms,A:2.4s)",
@@ -54,8 +54,8 @@ MODES_READABLE = {
     "sfr-win5ifg500arq2400r4dg0": "SFR (W:5,G:0.5ms,A:2.4s)",
 }
 MODES_BINS = {
-    'reass': [0],
-    "fwd": [0],
+    'hwr': [0],
+    "ff": [0],
     "e2e": [0, 96] + [
             # round up to nearest multiple of 16 if not multiple of 16
             ((((i * 72) // 16) + 1) * 16) if ((i * 72) % 16) > 0
@@ -82,8 +82,8 @@ def data_len_to_bin(mode, data_len):
 BYTE_LATENCY = .06
 
 
-def reass_exp_latency(data_len, hops, hop_latencies):
-    bin = data_len_to_bin("reass", data_len)
+def hwr_exp_latency(data_len, hops, hop_latencies):
+    bin = data_len_to_bin("hwr", data_len)
     frag_start_len = MODES_BINS[mode][bin]
     frag_num = bin + 1
     res = (frag_num * np.sum(hop_latencies[:(hops + 1)])) + \
@@ -96,7 +96,7 @@ def reass_exp_latency(data_len, hops, hop_latencies):
 
 
 MODES_EXP = {
-    "reass": reass_exp_latency,
+    "hwr": hwr_exp_latency,
 }
 
 

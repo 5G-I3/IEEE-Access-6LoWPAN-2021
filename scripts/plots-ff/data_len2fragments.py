@@ -89,10 +89,10 @@ def _existing_file(filename):
         raise ValueError("{} does not exist".format(filename))
     return filename
 
-COLS = ["reass", "fwd", "e2e", "sfr"]
+COLS = ["hwr", "ff", "e2e", "sfr"]
 TRANSLATE_MODE = {
-    "reass": "HWR",
-    "fwd": "FF",
+    "hwr": "HWR",
+    "ff": "FF",
     "e2e": "E2E",
     "sfr": "SFR",
 }

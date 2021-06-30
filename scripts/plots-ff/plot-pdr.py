@@ -24,7 +24,7 @@ from plot_results import DATA_PATH, DELAY, NAME_PATTERN, \
 
 DATA_LENS = tuple(range(16, 1025, 16))
 MODES = [
-    "reass",
+    "hwr",
     "sfr-win1ifg500arq1200r4dg0",
     "sfr-win1ifg100arq1200r4dg0",
     "sfr-win1ifg500arq2400r4dg0",
@@ -33,12 +33,12 @@ MODES = [
     "sfr-win5ifg500arq1200r4dg0",
     "sfr-win5ifg100arq2400r4dg0",
     "sfr-win5ifg500arq2400r4dg0",
-    "fwd",
+    "ff",
     "e2e",
 ]
 MODES_READABLE = {
-    "reass": "HWR",
-    "fwd": "FF",
+    "hwr": "HWR",
+    "ff": "FF",
     "sfr-win1ifg100arq1200r4dg0": "SFR (W:1,G:0.1ms,A:1.2s)",
     "sfr-win1ifg100arq2400r4dg0": "SFR (W:1,G:0.1ms,A:2.4s)",
     "sfr-win1ifg500arq1200r4dg0": "SFR (W:1,G:0.5ms,A:1.2s)",
@@ -230,7 +230,7 @@ for i, mode in enumerate(MODES):
         modes_tuple.append(
             ((int(m.group(1)),int(m.group(3)),int(m.group(2)),not int(m.group(5))), i)
         )
-    elif mode == "reass":
+    elif mode == "hwr":
         modes_tuple.append((tuple(4 * [0]), i))
     else:
         modes_tuple.append((tuple(4 * [float("inf")]), i))

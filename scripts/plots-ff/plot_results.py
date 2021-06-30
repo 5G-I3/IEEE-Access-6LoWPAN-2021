@@ -31,8 +31,8 @@ DATA_PATH = os.environ.get("DATA_PATH",
                            os.path.join(SCRIPT_PATH, "..", "..", "results"))
 
 COLORS = {
-    "reass": "#2245E0",
-    "fwd": "#E0B01F",
+    "hwr": "#2245E0",
+    "ff": "#E0B01F",
     "sfr-win1ifg100arq1200r4dg0": "#A0E00B",
     "sfr-win1ifg100arq1200r4dg1": "#A0E00B",
     "sfr-win1ifg100arq2400r4dg0": "#A0E00B",
@@ -72,8 +72,8 @@ COLORS = {
     "e2e": "#E05851",
 }
 MODES_READABLE = {
-    "reass": "HWR",
-    "fwd": "FF",
+    "hwr": "HWR",
+    "ff": "FF",
     "sfr-win1ifg100arq1200r4dg0": "SFR",    # " (1,100,1200,4,0)",
     "sfr-win1ifg100arq1200r4dg1": "SFR",    # " (1,100,1200,4,1)",
     "sfr-win1ifg100arq2400r4dg0": "SFR",    # " (1,100,2400,4,0)",
@@ -118,7 +118,7 @@ SAVEFIG_OPTS = {
 }
 
 NAME_PATTERN = parse_results.NAME_PATTERN.format(
-    mode=r"(?P<mode>(reass|fwd|e2e|sfr-\w+))",
+    mode=r"(?P<mode>(hwr|ff|e2e|sfr-\w+))",
     data_len=r"(?P<data_len>\d+)",
     delay=r"\d+"
 )
@@ -127,8 +127,8 @@ STATS_CSV_NAME_PATTERN_FMT = "{}.stats.csv".format(parse_results.NAME_PATTERN)
 
 RUNS = 3
 MODES = [
-     "reass",
-     "fwd",
+     "hwr",
+     "ff",
      "e2e",
      "sfr-win1ifg100arq1200r4dg0",
  ]
@@ -141,13 +141,13 @@ BAR_WIDTH = (1 / len(MODES)) - .05
 def plot_l2_retrans(runs=RUNS):
     plt.clf()
     offset = {
-            "reass": -0.30,
-            "fwd": -0.15,
+            "hwr": -0.30,
+            "ff": -0.15,
             "e2e": 0.15,
             "sfr-win1ifg100arq1200r4dg0": 0.30,
         }
     networks = set()
-    mode_marker = {"fwd": "x", "reass": "+", "e2e": ".", "sfr-win1ifg100arq1200r4dg0": "*"}
+    mode_marker = {"ff": "x", "hwr": "+", "e2e": ".", "sfr-win1ifg100arq1200r4dg0": "*"}
     for mode in MODES:
         l2_retrans = []
         means = [[] for _ in DATA_LENS]
@@ -251,16 +251,16 @@ def plot_pktbuf(runs=RUNS):
 def plot_rbuf_full(runs=RUNS):
     plt.clf()
     offset = {
-            "reass": -0.3,
-            "fwd": -0.2,
-            "fwd_vrb": 0.1,
+            "hwr": -0.3,
+            "ff": -0.2,
+            "ff_vrb": 0.1,
             "e2e": 0.1,
             "sfr-win1ifg100arq1200r4dg0": 0.2,
             "sfr-win1ifg100arq1200r4dg0_vrb": 0.3,
         }
     networks = set()
-    mode_marker = {"fwd": "x", "reass": "+", "e2e": ".", "sfr-win1ifg100arq1200r4dg0": "*",
-                   "fwd_vrb": "v", "sfr-win1ifg100arq1200r4dg0_vrb": "^"}
+    mode_marker = {"ff": "x", "hwr": "+", "e2e": ".", "sfr-win1ifg100arq1200r4dg0": "*",
+                   "ff_vrb": "v", "sfr-win1ifg100arq1200r4dg0_vrb": "^"}
     for mode in MODES:
         rbuf_full = []
         vrb_full = []
@@ -291,12 +291,12 @@ def plot_rbuf_full(runs=RUNS):
                                              "missing for {}"
                                              .format(filename,
                                                      row["node"]))
-                            if mode not in ["reass", "e2e"] and \
+                            if mode not in ["hwr", "e2e"] and \
                                row["vrb_full"] != "":
                                 vrb_full.append(
                                         (size, int(row["vrb_full"]))
                                     )
-                            elif mode not in ["reass", "e2e"] and \
+                            elif mode not in ["hwr", "e2e"] and \
                                  row["vrb_full"] == "":
                                 logging.warn("{}: Incomplete data set, "
                                              "VRB data missing for {}"
@@ -321,7 +321,7 @@ def plot_rbuf_full(runs=RUNS):
         plt.scatter([e[0] + offset[mode] for e in rbuf_full],
                     [e[1] for e in rbuf_full],
                     marker=mode_marker[mode], alpha=0.2)
-        if mode not in ["reass", "e2e"]:
+        if mode not in ["hwr", "e2e"]:
             means = np.array(vrb_full_m)
             means_mask = np.isfinite(means)
             tmp = "{}_vrb".format(mode)
@@ -346,7 +346,7 @@ def plot_rbuf_full(runs=RUNS):
 
 def plot_rbuf_full_vs_pktbuf(runs=RUNS):
     plt.clf()
-    mode = "fwd"
+    mode = "ff"
     networks = set()
     rbuf_full = []
     pktbuf = []

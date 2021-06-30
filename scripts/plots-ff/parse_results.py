@@ -7,6 +7,7 @@
 # directory for more details.
 
 import csv
+import ipaddress
 import logging
 import networkx as nx
 import re
@@ -30,16 +31,16 @@ NAME_PATTERN = r"6lo_comp_" \
                r"n(?P<network>m3-\d+x[0-9a-f]+)_c\d+__" \
                r"m{mode}_r{data_len}Bx(?P<count>\d+)x{delay}ms_(?P<timestamp>\d+)"
 LOG_NAME_PATTERN = r"{}\.log".format(NAME_PATTERN.format(
-    mode=r"(?P<mode>(reass|fwd|e2e|sfr-\w+))",
+    mode=r"(?P<mode>(hwr|ff|e2e|sfr-\w+))",
     data_len=r"(?P<data_len>\d+)",
     delay=r"\d+"
 ))
 
-LOG_EXP_STARTED_PATTERN = r"starting experiment"
+LOG_EXP_STARTED_PATTERN = r"Sending \d+ packets"
 LOG_DATA_PATTERN = r"(?P<time>\d+.\d+);(?P<node>m3-\d+);" \
-                   r"(> ?)?(?P<dir>(in|out|err));" \
-                   r"(?P<pkt_id>[0-9a-f]+)" \
-                   r"(;(?P<addr>[0-9a-f:]+);\d+|(?P<errno>\d+))?"
+                   r"(> ?)?(?P<dir>(recv|send|error));" \
+                   r"(?P<addr>[0-9a-f]+);" \
+                   r"(?P<errno>\d+);(?P<pkt_id>[0-9a-f]+)"
 LOG_RETRANS_PATTERN = r"(?P<node>m3-\d+);\s+TX succeeded \d+ errors \d+ " \
                       r"retransmissions (?P<retrans>\d+)"
 LOG_PKTBUF_SIZE_PATTERN = r"(?P<node>m3-\d+);packet buffer: " \
@@ -77,17 +78,14 @@ def stats_csvname(logname):
     return csvname
 
 
-def _global_to_link_local(addr):
-    return addr.replace(GLOBAL_PREFIX, LINK_LOCAL_PREFIX)
-
-
 def _src_addr_to_src(addr, network, data_path=DATA_PATH):
-    with open(os.path.join(data_path, "{}.link_local.csv".format(network))) \
+    with open(os.path.join(data_path, "nodes.csv".format(network))) \
          as lla_file:
         csvfile = csv.DictReader(lla_file)
         for row in csvfile:
-            if row["lla"] == _global_to_link_local(addr):
-                return row["node"]
+            lla = ipaddress.IPv6Address(row["addr"])
+            if (lla.packed[14] << 8) | lla.packed[15] == int(addr, base=16):
+                return row["name"]
     return None
 
 
@@ -95,9 +93,7 @@ def _parse_times_line(network, mode, data_len, line, match, times,
                       data_path=DATA_PATH):
     direction = match.group("dir")
     addr = match.group("addr")
-    assert(((direction in ["out", "err"]) and addr is None) or
-           ((direction == "in") and (addr is not None)))
-    if direction in ["out", "err"]:
+    if direction in ["send", "error"]:
         node = match.group("node")
         pkt_id = int(match.group("pkt_id"), base=16)
         return {
@@ -106,7 +102,8 @@ def _parse_times_line(network, mode, data_len, line, match, times,
             "src": node,
             "pkt_id": pkt_id,
             "send_time": float(match.group("time")),
-            "send_errno": int(match.group("errno") or 0)
+            "send_errno": int(match.group("errno") if direction == "error" else
+                              0)
         }
     else:
         node = _src_addr_to_src(addr, network, data_path)
