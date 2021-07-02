@@ -118,8 +118,10 @@ def construct_network(sink, iotlab_site=DEFAULT_IOTLAB_SITE,
     if api is None:
         api = get_default_api()
     # get all nodes that are alive and not booked from iotlab_site
-    node_selection = SinkNetworkedNodes.all_nodes(iotlab_site, "Alive",
-                                                  ARCHI_FULL, api, sink=sink)
+    node_selection = SinkNetworkedNodes.all_nodes(site=iotlab_site,
+                                                  state="Alive",
+                                                  archi=ARCHI_FULL, api=api,
+                                                  sink=sink)
     if get_uri(iotlab_site, sink) not in node_selection:
         raise NetworkConstructionError("Sink {} is not 'Alive' (maybe booked "
                                        "by other experiment?)".format(sink))
