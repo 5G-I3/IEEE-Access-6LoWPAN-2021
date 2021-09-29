@@ -1,15 +1,37 @@
-# Fragment Forwarding in Lossy Networks
+# Fragment Forwarding in Lossy Networks (IEEE Access)
 
-Code and documentation to reproduce our experiment results.
+<!-- TODO badges -->
 
-## Code
+This repository contains code and documentation to reproduce experimental
+results of the paper **"Fragment Forwarding in Lossy Networks"** published in
+IEEE Access.
+
+* Martine S. Lenders, Thomas C. Schmidt, Matthias Wählisch, "**Fragment
+  Forwarding in Lossy Networks**", in *IEEE Access*, <!-- TODO vol, pp --> 2021
+  <!-- TODO DOI -->
+
+##### Abstract
+
+> This paper evaluates four forwarding strategies for fragmented datagrams in the IoT on top of the common CSMA/CA MAC implementation for IEEE 802.15.4:
+> hop-wise reassembly, a minimal approach to direct forwarding of fragments, classic end-to-end fragmentation, and direct forwarding utilizing selective fragment recovery.
+> Additionally, we evaluate congestion control mechanisms for selective fragment recovery by increasing the feature set of congestion control.
+> Direct fragment forwarding and selective fragment recovery are challenged by the lack of forwarding information at subsequent fragments in 6LoWPAN and thus require additional data at the nodes.
+> We compare the four approaches in extensive experiments evaluating reliability, end-to-end latency, and memory consumption.
+> Our findings indicate  that direct fragment forwarding should be deployed with care, since higher packet transmission rates on the link layer can significantly reduce its reliability, which in turn can even further reduce end-to-end latency because of highly increased link layer retransmissions.
+> Selective fragment recovery can compensate this disadvantage but struggles with the same problem underneath, constraining its full potential.
+> Congestion control for selective fragment recovery should be chosen so that small congestion windows that are growable together with fragment pacing are used.
+> In case of fewer fragments per datagram, pacing is less of a concern, but the congestion window has an upper bound.
+
+[paper-badge]: https://img.shields.io/badge/Paper-IEEE%20Xplore-green
+
+## Repository structure
 
 The explicit RIOT version is included as a submodule in this repository
-([RIOT]). It is based on the 2021.04 release of RIOT but also contains all
-relevant changes to conduct the experiments. The PRs these changes came from are
-documented within the git history and the history can be recreated using the
-[`cherry-pick-prs.sh`](./cherry-pick-prs.sh) (merge conflicts might need to be
-resolved by hand). For more information use
+([RIOT]). It is based on the [2021.04 release][2021.04] of RIOT but also
+contains all relevant changes to conduct the experiments. The PRs these changes
+came from are documented within the git history and the history can be recreated
+using the [`cherry-pick-prs.sh`](./cherry-pick-prs.sh) (merge conflicts might
+need to be resolved by hand). For more information use
 
 ```sh
 cd RIOT
@@ -57,8 +79,5 @@ pip install -r ./scripts/experiment_ctrl/requirements.txt
 ./scripts/experiment_ctrl/setup_exp.sh
 ```
 
-Documentation
--------------
-TODO: link paper if it is accepted
-
 [RIOT]: https://github.com/5G-I3/RIOT-public/tree/ieee-access-2021
+[2021.04]: https://github.com/RIOT-OS/RIOT/releases/tag/2021.04
