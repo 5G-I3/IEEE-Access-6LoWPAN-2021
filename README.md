@@ -27,7 +27,7 @@ IEEE Access.
 ## Repository structure
 
 ### [RIOT/][RIOT]
-The explicit RIOT version is included as a submodule in this repository
+The explicit RIOT version is included as a sub-module in this repository
 ([RIOT]). It is based on the [2021.04 release][2021.04] of RIOT but also
 contains all relevant changes to conduct the experiments. The PRs these changes
 came from are documented within the git history and the history can be recreated
@@ -73,11 +73,11 @@ convenience.
 
 Usage
 -----
-You can look into all the code and its documentation to figure everything out,
-but the quickest way to start the experiments (given the [provided network for
+For detailed usage, have a look into all the code and its documentation.
+The quickest way to start the experiments, given the [provided network for
 Section IV. in results/](./results/m3-57x9938589e.edgelist.gz) is bookable in
-the IoT-LAB and all requirements on the OS side are fulfilled, see [scripts
-README's](./scripts/experiment_ctrl/README.md)) is to just run:
+the IoT-LAB and all requirements on the OS-side are fulfilled, see [scripts
+README's](./scripts/experiment_ctrl/README.md), is to just run:
 
 ```sh
 rm -rf env
