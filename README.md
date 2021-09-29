@@ -63,6 +63,14 @@ source env/bin/activate
 
 [virtualenv]: https://virtualenv.pypa.io/en/latest/
 
+### [results/](./results)
+In their default configuration, the scripts will put their result files into the
+`results` directory. There, we also  provided the
+[NetworkX](./scripts/plots-ff#requirements) [edge
+list file](./results/m3-57x9938589e.edgelist.gz) and the two graphical
+representations (logical and geographic topology) of that network, for your
+convenience.
+
 Usage
 -----
 You can look into all the code and its documentation to figure everything out,
