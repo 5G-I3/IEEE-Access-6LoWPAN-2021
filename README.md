@@ -26,6 +26,7 @@ IEEE Access.
 
 ## Repository structure
 
+### [RIOT/][RIOT]
 The explicit RIOT version is included as a submodule in this repository
 ([RIOT]). It is based on the [2021.04 release][2021.04] of RIOT but also
 contains all relevant changes to conduct the experiments. The PRs these changes
@@ -38,11 +39,13 @@ cd RIOT
 git log
 ```
 
+### [apps/](./apps)
 The `apps` directory contains the RIOT applications required for the
 experiments, one for the data [sink](./apps/sink) and one for the sources
 [sources and forwarders](./apps/source). Please refer to their `README`s for
 their usage.
 
+### [scripts/](./scripts)
 The `scripts` directory contains scripts for [measuring the testbed as
 described in Section IV-A of the paper](./scripts/testbed_measure), to [conduct
 the experiments](./scripts/experiment_ctrl), and to plot the results of both
