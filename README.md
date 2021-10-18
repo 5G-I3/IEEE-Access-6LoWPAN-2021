@@ -12,15 +12,15 @@ IEEE Access.
 
 ##### Abstract
 
-> This paper evaluates four forwarding strategies for fragmented datagrams in the IoT on top of the common CSMA/CA MAC implementation for IEEE 802.15.4:
-> hop-wise reassembly, a minimal approach to direct forwarding of fragments, classic end-to-end fragmentation, and direct forwarding utilizing selective fragment recovery.
-> Additionally, we evaluate congestion control mechanisms for selective fragment recovery by increasing the feature set of congestion control.
-> Direct fragment forwarding and selective fragment recovery are challenged by the lack of forwarding information at subsequent fragments in 6LoWPAN and thus require additional data at the nodes.
-> We compare the four approaches in extensive experiments evaluating reliability, end-to-end latency, and memory consumption.
-> Our findings indicate  that direct fragment forwarding should be deployed with care, since higher packet transmission rates on the link layer can significantly reduce its reliability, which in turn can even further reduce end-to-end latency because of highly increased link layer retransmissions.
-> Selective fragment recovery can compensate this disadvantage but struggles with the same problem underneath, constraining its full potential.
-> Congestion control for selective fragment recovery should be chosen so that small congestion windows that are growable together with fragment pacing are used.
-> In case of fewer fragments per datagram, pacing is less of a concern, but the congestion window has an upper bound.
+> This paper evaluates four forwarding strategies for fragmented datagrams in the Internet of Things (IoT).
+> We focus on classic end-to-end fragmentation, hop-wise reassembly, a minimal approach to direct forwarding of fragments, and direct forwarding utilizing selective fragment recovery.
+> To fully analyze the potentials of selective fragment recovery, we include four common congestion control mechanisms.
+> We compare all fragmentation strategies comprehensively in extensive experiments to assess reliability, end-to-end latency, and memory consumption on top of IEEE~802.15.4 and its common CSMA/CA~MAC~implementation.
+> Our key findings include three takeaways.
+> First, direct fragment forwarding should be deployed with care since higher packet transmission rates on the link layer can significantly reduce reliability, which can even further increase end-to-end latency because of highly increased link layer retransmissions.
+> Second, selective fragment recovery can mitigate the problems underneath.
+> Third, congestion control for selective fragment recovery should be chosen such that small congestion windows grow together with fragment pacing.
+> In case of fewer fragments per datagram, pacing is less of a concern but the congestion window is limited by an upper bound.
 
 [paper-badge]: https://img.shields.io/badge/Paper-IEEE%20Xplore-green
 
