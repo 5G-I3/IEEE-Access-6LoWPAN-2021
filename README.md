@@ -90,5 +90,5 @@ pip install -r ./scripts/experiment_ctrl/requirements.txt
 ./scripts/experiment_ctrl/setup_exp.sh
 ```
 
-[RIOT]: https://github.com/5G-I3/RIOT-public/tree/ieee-access-2021
+[RIOT]: https://github.com/anr-bmbf-pivot/RIOT/tree/ieee-access-2021
 [2021.04]: https://github.com/RIOT-OS/RIOT/releases/tag/2021.04

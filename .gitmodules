@@ -1,4 +1,4 @@
 [submodule "RIOT"]
 	path = RIOT
-	url = https://github.com/5G-I3/RIOT-public.git
+	url = https://github.com/anr-bmbf-pivot/RIOT.git
 	branch = ieee-access-2021
