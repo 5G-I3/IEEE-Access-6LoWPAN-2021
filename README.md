@@ -1,6 +1,6 @@
 # Fragment Forwarding in Lossy Networks (IEEE Access)
 
-<!-- TODO badges -->
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5575035.svg)](https://doi.org/10.5281/zenodo.5575035)
 
 This repository contains code and documentation to reproduce experimental
 results of the paper **"Fragment Forwarding in Lossy Networks"** published in
