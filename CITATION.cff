@@ -1,0 +1,46 @@
+cff-version: 1.1.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Lenders
+    given-names: Martine S.
+    affiliation: Freie Universität Berlin
+    email: m.lenders@fu-berlin.de
+    orcid: https://orcid.org/0000-0001-7378-1045
+  - family-names: Schmidt
+    given-names: Thomas C.
+    affiliation: HAW Hamburg
+    email: t.schmidt@haw-hamburg.de
+    orcid: https://orcid.org/0000-0002-0956-7885
+  - family-names: Wählisch
+    given-names: Matthias
+    affiliation: Freie Universität Berlin
+    email: m.waehlisch@fu-berlin.de
+    orcid: https://orcid.org/0000-0002-3825-2807
+title: Fragment Forwarding in Lossy Networks
+date-released: 2021-10-18
+doi: 10.5281/zenodo.5575035
+preferred-citation:
+  title: Fragment Forwarding in Lossy Networks
+  authors:
+    - family-names: Lenders
+      given-names: Martine S.
+      affiliation: Freie Universität Berlin
+      email: m.lenders@fu-berlin.de
+      orcid: https://orcid.org/0000-0001-7378-1045
+    - family-names: Schmidt
+      given-names: Thomas C.
+      affiliation: HAW Hamburg
+      email: t.schmidt@haw-hamburg.de
+      orcid: https://orcid.org/0000-0002-0956-7885
+    - family-names: Wählisch
+      given-names: Matthias
+      affiliation: Freie Universität Berlin
+      email: m.waehlisch@fu-berlin.de
+      orcid: https://orcid.org/0000-0002-3825-2807
+  journal: IEEE Access
+  scope: "If you use this software, we prefer that you cite our paper as below."
+  publisher:
+    - name: IEEE
+  year: 2021
+  status: submitted
+  type: article
