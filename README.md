@@ -16,7 +16,7 @@ published in IEEE Access.
 > This paper evaluates four forwarding strategies for fragmented datagrams in the Internet of Things (IoT).
 > We focus on classic end-to-end fragmentation, hop-wise reassembly, a minimal approach to direct forwarding of fragments, and direct forwarding utilizing selective fragment recovery.
 > To fully analyze the potentials of selective fragment recovery, we include four common congestion control mechanisms.
-> We compare all fragmentation strategies comprehensively in extensive experiments to assess reliability, end-to-end latency, and memory consumption on top of IEEE~802.15.4 and its common CSMA/CA~MAC~implementation.
+> We compare all fragmentation strategies comprehensively in extensive experiments to assess reliability, end-to-end latency, and memory consumption on top of IEEE&nbsp;802.15.4 and its common CSMA/CA&nbsp;MAC&nbsp;implementation.
 > Our key findings include three takeaways.
 > First, direct fragment forwarding should be deployed with care since higher packet transmission rates on the link layer can significantly reduce reliability, which can even further increase end-to-end latency because of highly increased link layer retransmissions.
 > Second, selective fragment recovery can mitigate the problems underneath.
