@@ -1,14 +1,15 @@
 # Fragment Forwarding in Lossy Networks (IEEE Access)
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.5575035.svg)](https://doi.org/10.5281/zenodo.5575035)
+[![Paper on IEEE Xplore][paper-badge]][paper-ieeexplore]
+[![DOI][software-badge]][software-doi]
 
 This repository contains code and documentation to reproduce experimental
-results of the paper **"Fragment Forwarding in Lossy Networks"** published in
-IEEE Access.
+results of the paper **"[Fragment Forwarding in Lossy Networks][paper-ieeexplore]"**
+published in IEEE Access.
 
 * Martine S. Lenders, Thomas C. Schmidt, Matthias Wählisch, "**Fragment
-  Forwarding in Lossy Networks**", in *IEEE Access*, <!-- TODO vol, pp --> 2021
-  <!-- TODO DOI -->
+  Forwarding in Lossy Networks**", in *IEEE Access*, vol. 9, <!-- TODO pp, month --> 2021,
+  doi: [10.1109/ACCESS.2021.3121557][paper-doi]
 
 ##### Abstract
 
@@ -22,7 +23,11 @@ IEEE Access.
 > Third, congestion control for selective fragment recovery should be chosen such that small congestion windows grow together with fragment pacing.
 > In case of fewer fragments per datagram, pacing is less of a concern but the congestion window is limited by an upper bound.
 
+[paper-doi]: https://doi.org/10.1109/ACCESS.2021.3121557
+[paper-ieeexplore]: https://ieeexplore.ieee.org/document/9580895
 [paper-badge]: https://img.shields.io/badge/Paper-IEEE%20Xplore-green
+[software-badge]: https://zenodo.org/badge/DOI/10.5281/zenodo.5575035.svg
+[software-doi]: https://doi.org/10.5281/zenodo.5575035
 
 ## Repository structure
 

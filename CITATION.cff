@@ -41,6 +41,8 @@ preferred-citation:
   scope: "If you use this software, we prefer that you cite our paper as below."
   publisher:
     - name: IEEE
+  volume: 9
   year: 2021
   status: submitted
   type: article
+  doi: 10.1109/ACCESS.2021.3121557
