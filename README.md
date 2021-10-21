@@ -47,9 +47,9 @@ their usage.
 
 ### [scripts/](./scripts)
 The `scripts` directory contains scripts for [measuring the testbed as
-described in Section IV-A of the paper](./scripts/testbed_measure), to [conduct
-the experiments](./scripts/experiment_ctrl), and to plot the results of both
-[Section IV. COMPARISON OF FRAGMENT FORWARDING METHODS](./scripts/plots-ff)
+described in Section IV-A.1 of the paper](./scripts/testbed_measure), to
+[conduct the experiments](./scripts/experiment_ctrl), and to plot the results of
+both [Section IV. COMPARISON OF FRAGMENT FORWARDING METHODS](./scripts/plots-ff)
 and [Section V. EVALUATION OF CONGESTION CONTROL WITH SFR](./scripts/plots-cc).
 Please also refer to their respective `README`s for their usage.
 
