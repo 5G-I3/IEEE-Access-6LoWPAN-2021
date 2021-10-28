@@ -8,7 +8,7 @@ results of the paper **"[Fragment Forwarding in Lossy Networks][paper-ieeexplore
 published in IEEE Access.
 
 * Martine S. Lenders, Thomas C. Schmidt, Matthias Wählisch, "**Fragment
-  Forwarding in Lossy Networks**", in *IEEE Access*, vol. 9, <!-- TODO pp, month --> 2021,
+  Forwarding in Lossy Networks**", in *IEEE Access*, vol. 9, pp. 143969–143987, October 2021,
   doi: [10.1109/ACCESS.2021.3121557][paper-doi]
 
 ##### Abstract
